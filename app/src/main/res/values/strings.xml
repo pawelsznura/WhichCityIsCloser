@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WhichCityIsCloser</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btnplayhome">Play</string>
+    <string name="btnhighscorehome">High Score</string>
+    <string name="btnquithome">Quit</string>
+    <string name="imagecontenthome">Logo</string>
+</resources>
