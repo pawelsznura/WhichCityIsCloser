@@ -3,17 +3,19 @@ package com.pawelsznuradev.whichcityiscloser;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +61,30 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        Button btnPlay = view.findViewById(R.id.btnplayhome);
+        btnPlay.setOnClickListener(this);
+        Button btnHighScore = view.findViewById(R.id.btnhighscorehome);
+        btnHighScore.setOnClickListener(this);
+        Button btnQuit = view.findViewById(R.id.btnquithome);
+        btnQuit.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btnplayhome){
+            Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_playFragment);
+        } else if (v.getId() == R.id.btnhighscorehome){
+            Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_optionsFragment);
+
+        } else if (v.getId() == R.id.btnquithome){
+            System.exit(0);
+        }
+
+
     }
 }
