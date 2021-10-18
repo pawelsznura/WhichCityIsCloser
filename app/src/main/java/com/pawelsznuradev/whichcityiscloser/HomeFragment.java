@@ -66,8 +66,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         Button btnPlay = view.findViewById(R.id.btnplayhome);
         btnPlay.setOnClickListener(this);
-        Button btnHighScore = view.findViewById(R.id.btnhighscorehome);
-        btnHighScore.setOnClickListener(this);
+;
         Button btnQuit = view.findViewById(R.id.btnquithome);
         btnQuit.setOnClickListener(this);
 
@@ -78,10 +77,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.btnplayhome){
             Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_playFragment);
-        } else if (v.getId() == R.id.btnhighscorehome){
-            Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_optionsFragment);
-
-        } else if (v.getId() == R.id.btnquithome){
+        }  else if (v.getId() == R.id.btnquithome){
             System.exit(0);
         }
 

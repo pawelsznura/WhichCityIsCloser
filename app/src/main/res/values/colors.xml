@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="Primary">#6c9675</color>
-    <color name="PrimaryLight">#9bc7a4</color>
-    <color name="PrimaryDark">#406849</color>
+    <color name="MyGreen">#6c9675</color>
+    <color name="MyGreenLight">#9bc7a4</color>
+    <color name="MyGreenDark">#406849</color>
 
-    <color name="Secondary">#fbf2b1</color>
-    <color name="SecondaryLight">#ffffe3</color>
-    <color name="SecondaryDark">#c7bf81</color>
+    <color name="MyYellow">#fbf2b1</color>
+    <color name="MyYellowLight">#ffffe3</color>
+    <color name="MyYellowDark">#c7bf81</color>
 
-    <color name="Tertiary">#AADAFE</color>
-    <color name="TertiaryLight">#ddffff</color>
-    <color name="TertiaryDark">#78a9cb</color>
+    <color name="MyBlue">#AADAFE</color>
+    <color name="MyBlueLight">#ddffff</color>
+    <color name="MyBlueDark">#78a9cb</color>
 
 
 W

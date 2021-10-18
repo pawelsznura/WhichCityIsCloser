@@ -5,7 +5,8 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Tertiary"
+    android:background="@color/MyBlue"
+    android:theme="@style/MyFragment"
     tools:context=".HomeFragment">
 
     <Button
@@ -14,23 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginBig"
         android:text="@string/btnplayhome"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/btnhighscorehome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginBig"
-        android:text="@string/btnhighscorehome"
-        android:textColor="#212121"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnplayhome" />
 
     <Button
         android:id="@+id/btnquithome"
@@ -38,20 +26,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginBig"
         android:text="@string/btnquithome"
-        android:textColor="#212121"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnhighscorehome" />
+        app:layout_constraintTop_toBottomOf="@+id/btnplayhome" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="326dp"
-        android:layout_height="232dp"
-        android:layout_marginTop="@dimen/marginBig"
-        android:contentDescription="@string/imagecontenthome"
+        android:layout_width="305dp"
+        android:layout_height="294dp"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
