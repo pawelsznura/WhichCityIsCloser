@@ -68,6 +68,9 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_play, container, false);
 
+        ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titlePlayFragment));
+
+
         Button btnCity1 = view.findViewById(R.id.btnCity1Play);
         btnCity1.setOnClickListener(this);
 

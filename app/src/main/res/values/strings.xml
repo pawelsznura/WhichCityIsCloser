@@ -1,12 +1,14 @@
 <resources>
-    <string name="app_name">WhichCityIsCloser</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Which City Is Closer</string>
+    <string name="titleHomeFragment">Which City Is Closer</string>
+    <string name="titleOptionsFragment">Options</string>
+    <string name="titleHighScoresFragment">High Scores</string>
+    <string name="titlePlayFragment">Which City Is Closer</string>
+    <string name="titleResultFragment">Which City Is Closer</string>
     <string name="btnplayhome">Play</string>
     <string name="btnhighscorehome">High Score</string>
     <string name="btnquithome">Quit</string>
     <string name="imagecontenthome">Logo</string>
-    <string name="title_activity_main2">MainActivity2</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

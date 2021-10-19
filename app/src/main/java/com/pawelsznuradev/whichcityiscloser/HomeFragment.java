@@ -38,7 +38,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
      * @param param2 Parameter 2.
      * @return A new instance of fragment HomeFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -55,6 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -62,7 +62,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleHomeFragment));
+
 
         Button btnPlay = view.findViewById(R.id.btnplayhome);
         btnPlay.setOnClickListener(this);
@@ -82,5 +86,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // set title bar https://stackoverflow.com/questions/28389841/change-actionbar-title-using-fragments/38224963
+        // set title during the first startup, in other cases the statement in onCreateView is enough
+        ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleHomeFragment));
     }
 }

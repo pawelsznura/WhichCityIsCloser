@@ -63,9 +63,21 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        // set the title when dark mode is enabled, in other cases statement in onCreateView is enough
+        ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleOptionsFragment));
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_options, container, false);
+
+        ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleOptionsFragment));
+
 
         // Spinner for units selection Metric or Imperial
         Spinner spinner = (Spinner) view.findViewById(R.id.units_spinner);
@@ -80,7 +92,7 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
 
         // TODO dark mode on, switch off bug
         // Switch for dark mode
-        // base on https://stackoverflow.com/questions/11278507/android-widget-switch-on-off-event-listener
+        // based on https://stackoverflow.com/questions/11278507/android-widget-switch-on-off-event-listener
         Switch darkModeSwitch = (Switch) view.findViewById(R.id.darkModeSwitch);
         darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
