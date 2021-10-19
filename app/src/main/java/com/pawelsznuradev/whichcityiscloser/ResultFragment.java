@@ -3,17 +3,19 @@ package com.pawelsznuradev.whichcityiscloser;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ResultFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ResultFragment extends Fragment {
+public class ResultFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,7 +63,23 @@ public class ResultFragment extends Fragment {
         // Inflate the layout for this fragment
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleResultFragment));
 
+        View view = inflater.inflate(R.layout.fragment_result, container, false);
 
-        return inflater.inflate(R.layout.fragment_result, container, false);
+        Button btnNext = view.findViewById(R.id.btnNextResult);
+        btnNext.setOnClickListener(this);
+        // if user was wrong then change text of the button
+
+        return view;
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.btnNextResult){
+            // if user was right then navigate to play fragment
+            Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_playFragment);
+            // if user was wrong then navigate to home fragment
+//            Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_homeFragment);
+        }
     }
 }

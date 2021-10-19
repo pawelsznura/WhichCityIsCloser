@@ -34,4 +34,9 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="delete_the_high_scores_btn_text">Delete the high scores</string>
+    <string name="right">Right!</string>
+    <string name="score">Your score: 4</string>
+    <string name="city1result">London is 10552.6 miles away</string>
+    <string name="city2result">New York is 9935 miles away</string>
+    <string name="next">Next</string>
 </resources>

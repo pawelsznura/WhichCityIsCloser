@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/MyFragment"
-
     tools:context=".ResultFragment">
 
     <ImageView
@@ -21,14 +20,13 @@
 
 
     <TextView
-        android:id="@+id/whichCityIsCloserResultText"
+        android:id="@+id/rightWrongResultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginBig"
-        android:text="Which city is closer to Sydney?"
+        android:text="@string/right"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
@@ -37,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginBig"
-        android:text="Your score: 4"
+        android:text="@string/score"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -46,27 +44,38 @@
 
     <TextView
         android:id="@+id/city1ResultText"
-        android:layout_width="153dp"
-        android:layout_height="131dp"
+        android:layout_width="151dp"
+        android:layout_height="100dp"
         android:layout_marginTop="@dimen/marginBig"
-        android:text="London is 10552.6 miles away"
+        android:text="@string/city1result"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/city2ResultText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/whichCityIsCloserResultText" />
+        app:layout_constraintTop_toBottomOf="@+id/rightWrongResultText" />
 
     <TextView
         android:id="@+id/city2ResultText"
         android:layout_width="151dp"
-        android:layout_height="133dp"
-        android:text="New York is 9935 miles away"
+        android:layout_height="100dp"
+        android:text="@string/city2result"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/city1ResultText"
         app:layout_constraintTop_toTopOf="@+id/city1ResultText" />
+
+    <Button
+        android:id="@+id/btnNextResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginMedium"
+        android:text="@string/next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreResultText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
