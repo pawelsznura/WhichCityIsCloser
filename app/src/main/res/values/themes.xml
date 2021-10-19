@@ -23,6 +23,7 @@
 
     <style name="MyFragment" parent="Theme.WhichCityIsCloser">
         <item name="android:background">@color/MyBlue</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 
