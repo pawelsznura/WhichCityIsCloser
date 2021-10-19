@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub/WhichCityIsCloser/app/src/main/res/drawable/ic_menu_camera.xml" value="0.225" />
+        <entry key="..\:/GitHub/WhichCityIsCloser/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.225" />
+        <entry key="..\:/GitHub/WhichCityIsCloser/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.225" />
+        <entry key="..\:/GitHub/WhichCityIsCloser/app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.225" />
         <entry key="..\:/GitHub/WhichCityIsCloser/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
         <entry key="..\:/GitHub/WhichCityIsCloser/app/src/main/res/layout/activity_main2.xml" value="0.20885416666666667" />
         <entry key="..\:/GitHub/WhichCityIsCloser/app/src/main/res/layout/content_main.xml" value="0.20885416666666667" />
