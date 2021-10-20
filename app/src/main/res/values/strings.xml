@@ -39,4 +39,11 @@
     <string name="city1result">London is 10552.6 miles away</string>
     <string name="city2result">New York is 9935 miles away</string>
     <string name="next">Next</string>
+    <string name="units">Units</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="imgHomeDescription">App Logo</string>
+    <string name="enter_your_username_here">Enter your username here</string>
+    <string name="placeholder_image">placeholder image</string>
 </resources>

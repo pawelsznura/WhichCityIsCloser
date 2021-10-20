@@ -12,13 +12,14 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/map_play"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.5"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/placeholder_image"
 
+        android:src="@drawable/map_play"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintWidth_percent="0.5"
+        tools:ignore="ImageContrastCheck"
+        tools:layout_editor_absoluteY="4dp" />
 
     <Button
         android:id="@+id/btnCity1Play"
@@ -26,9 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginBig"
         android:text="London"
+        app:layout_constraintBottom_toTopOf="@+id/scoreResultText"
         app:layout_constraintEnd_toStartOf="@+id/btnCity2Play"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/whichCityIsCloserPlayText" />
 
     <Button
@@ -36,22 +38,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New York"
+        app:layout_constraintBottom_toTopOf="@+id/scoreResultText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnCity1Play"
-        app:layout_constraintTop_toTopOf="@+id/btnCity1Play" />
+        app:layout_constraintTop_toBottomOf="@+id/whichCityIsCloserPlayText" />
 
     <TextView
         android:id="@+id/whichCityIsCloserPlayText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginBig"
         android:text="Which city is closer to Sydney?"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCity1Play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/scoreResultText"
@@ -60,8 +63,9 @@
         android:layout_marginTop="@dimen/marginBig"
         android:text="Your score: 3"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/btnCity1Play" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,8 +5,8 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OptionsFragment"
-    android:theme="@style/MyFragment">
+    android:theme="@style/MyFragment"
+    tools:context=".OptionsFragment">
 
     <TextView
         android:id="@+id/unitsText"
@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/marginMedium"
         android:gravity="center"
         android:minHeight="48dp"
-        android:text="Units"
+        android:text="@string/units"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
         android:layout_marginTop="@dimen/marginMedium"
         android:layout_marginEnd="@dimen/marginSmall"
         android:minHeight="48dp"
-        android:text="Dark mode"
+        android:text="@string/dark_mode"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,11 +57,39 @@
         android:layout_height="48dp"
         android:layout_marginStart="@dimen/marginSmall"
         android:layout_marginTop="@dimen/marginMedium"
-        android:layout_marginEnd="@dimen/marginSmall"
 
+        android:layout_marginEnd="@dimen/marginSmall"
         android:text="@string/delete_the_high_scores_btn_text"
         android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameOptions" />
+
+    <EditText
+        android:id="@+id/inputUsernameOptions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginMedium"
+        android:layout_marginEnd="@dimen/marginSmall"
+        android:ems="10"
+        android:hint="@string/enter_your_username_here"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/usernameOptions"
+        app:layout_constraintTop_toTopOf="@+id/usernameOptions" />
+
+    <TextView
+        android:id="@+id/usernameOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginSmall"
+        android:layout_marginTop="@dimen/marginMedium"
+        android:gravity="center"
+        android:minHeight="48dp"
+
+        android:text="@string/username"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/darkModeSwitch" />
 

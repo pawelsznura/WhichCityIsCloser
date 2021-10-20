@@ -12,12 +12,13 @@
         android:id="@+id/btnplayhome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginBig"
         android:text="@string/btnplayhome"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
 
     <Button
         android:id="@+id/btnquithome"
@@ -27,19 +28,19 @@
         android:text="@string/btnquithome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/btnplayhome"
         tools:ignore="TextContrastCheck" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="305dp"
-        android:layout_height="294dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/imgHomeDescription"
         android:src="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/imgHomeDescription" />
+        app:layout_constraintWidth_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

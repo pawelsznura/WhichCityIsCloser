@@ -8,92 +8,70 @@
     android:theme="@style/MyFragment"
     tools:context=".ResultFragment">
 
-    <!--    <LinearLayout-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent">-->
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="0dp"-->
-    <!--            android:layout_weight="0.5"-->
-    <!--            android:background="#ff0000"-->
-    <!--            >-->
-
-    <!--            <ImageView-->
-    <!--                android:id="@+id/imageView3"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="match_parent"-->
-    <!--                android:adjustViewBounds="true"-->
-    <!--                android:src="@drawable/map_result" />-->
-    <!--        </RelativeLayout>-->
-
-
-    <!--        <View-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="0dp"-->
-    <!--            android:layout_weight="0.5"-->
-    <!--            >-->
-
-    <!--        </View>-->
-    <!--    </LinearLayout>-->
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="363dp"
+        android:contentDescription="@string/placeholder_image"
         android:src="@drawable/map_result"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5"
+        tools:ignore="ImageContrastCheck" />
 
 
     <TextView
         android:id="@+id/rightWrongResultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginBig"
         android:text="@string/right"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/city1ResultText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/scoreResultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginMedium"
+        android:layout_marginTop="@dimen/marginBig"
         android:text="@string/score"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnNextResult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/city1ResultText" />
 
     <TextView
         android:id="@+id/city1ResultText"
         android:layout_width="151dp"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:layout_marginTop="@dimen/marginBig"
         android:text="@string/city1result"
         android:textAlignment="center"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/scoreResultText"
         app:layout_constraintEnd_toStartOf="@+id/city2ResultText"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/rightWrongResultText" />
 
     <TextView
         android:id="@+id/city2ResultText"
         android:layout_width="151dp"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:text="@string/city2result"
         android:textAlignment="center"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/scoreResultText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/city1ResultText"
-        app:layout_constraintTop_toTopOf="@+id/city1ResultText" />
+        app:layout_constraintTop_toBottomOf="@+id/rightWrongResultText" />
 
     <Button
         android:id="@+id/btnNextResult"
@@ -101,9 +79,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginMedium"
         android:text="@string/next"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/scoreResultText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
