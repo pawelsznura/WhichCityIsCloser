@@ -74,12 +74,14 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_options, container, false);
 
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleOptionsFragment));
 
 
         // Spinner for units selection Metric or Imperial
+        // based on https://developer.android.com/guide/topics/ui/controls/spinner
         Spinner spinner = (Spinner) view.findViewById(R.id.units_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.units_array, R.layout.support_simple_spinner_dropdown_item);
@@ -90,7 +92,7 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
         spinner.setOnItemSelectedListener(this);
 
 
-        // TODO dark mode on, switch off bug
+        // TODO dark mode on, switch off bug,
         // Switch for dark mode
         // based on https://stackoverflow.com/questions/11278507/android-widget-switch-on-off-event-listener
         Switch darkModeSwitch = (Switch) view.findViewById(R.id.darkModeSwitch);
@@ -107,7 +109,7 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
             }
         });
 
-        // Inflate the layout for this fragment
+
         return view;
     }
 

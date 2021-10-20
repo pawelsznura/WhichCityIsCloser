@@ -8,34 +8,7 @@
     android:theme="@style/MyFragment"
     tools:context=".ResultFragment">
 
-    <!--    <LinearLayout-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent">-->
-    <!--        <RelativeLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="0dp"-->
-    <!--            android:layout_weight="0.5"-->
-    <!--            android:background="#ff0000"-->
-    <!--            >-->
-
-    <!--            <ImageView-->
-    <!--                android:id="@+id/imageView3"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="match_parent"-->
-    <!--                android:adjustViewBounds="true"-->
-    <!--                android:src="@drawable/map_result" />-->
-    <!--        </RelativeLayout>-->
-
-
-    <!--        <View-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="0dp"-->
-    <!--            android:layout_weight="0.5"-->
-    <!--            >-->
-
-    <!--        </View>-->
-    <!--    </LinearLayout>-->
+    <!--  this image is a placeholder for a interactive map  -->
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="0dp"

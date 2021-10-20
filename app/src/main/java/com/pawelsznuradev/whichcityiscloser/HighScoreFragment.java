@@ -59,6 +59,8 @@ public class HighScoreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        // set the title in the action bar
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleHighScoresFragment));
 
 

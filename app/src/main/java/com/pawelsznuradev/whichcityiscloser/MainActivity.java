@@ -21,14 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
 
-    //    private NavController navController;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        // based on https://developer.android.com/guide/navigation/navigation-ui
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -40,9 +38,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-
-
-
     }
 
 
@@ -50,9 +45,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
-            || super.onSupportNavigateUp();
+                || super.onSupportNavigateUp();
     }
 
+    // based on https://stackoverflow.com/questions/15560904/setting-custom-actionbar-title-from-fragment
     public void setAppBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }

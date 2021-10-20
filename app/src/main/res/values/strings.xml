@@ -46,4 +46,6 @@
     <string name="imgHomeDescription">App Logo</string>
     <string name="enter_your_username_here">Enter your username here</string>
     <string name="placeholder_image">placeholder image</string>
+    <string name="high_scores">High Scores</string>
+    <string name="options">Options</string>
 </resources>

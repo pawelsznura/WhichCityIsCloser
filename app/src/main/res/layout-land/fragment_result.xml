@@ -8,6 +8,8 @@
     android:theme="@style/MyFragment"
     tools:context=".ResultFragment">
 
+
+    <!--  this image is a placeholder for a interactive map  -->
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="0dp"

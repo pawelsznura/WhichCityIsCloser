@@ -5,12 +5,12 @@
     <item
         android:id="@+id/optionsFragment"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Options" />
+        android:title="@string/options" />
 
 
     <item
         android:id="@+id/highScoreFragment"
         android:icon="@drawable/ic_baseline_emoji_events_24"
-        android:title="High Scores" />
+        android:title="@string/high_scores" />
 
 </menu>

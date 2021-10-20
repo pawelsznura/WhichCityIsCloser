@@ -68,9 +68,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleHomeFragment));
 
 
+        // based on Week 3 lecture slides
         Button btnPlay = view.findViewById(R.id.btnplayhome);
         btnPlay.setOnClickListener(this);
-;
+
         Button btnQuit = view.findViewById(R.id.btnquithome);
         btnQuit.setOnClickListener(this);
 
@@ -79,6 +80,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        // based on Week 3 lecture slides
         if (v.getId() == R.id.btnplayhome){
             Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_playFragment);
         }  else if (v.getId() == R.id.btnquithome){

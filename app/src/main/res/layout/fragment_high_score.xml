@@ -9,6 +9,7 @@
 
     tools:context=".HighScoreFragment">
 
+    <!--  The list here is just a placeholder, in the final app this will be a RecyclerView list   -->
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
