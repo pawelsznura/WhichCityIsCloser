@@ -72,10 +72,10 @@
         android:layout_marginStart="@dimen/marginMedium"
         android:layout_marginEnd="@dimen/marginSmall"
         android:ems="10"
-        android:hint="@string/enter_your_username_here"
+        android:hint="@string/enter_your_username"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnUsernameSaveOptions"
         app:layout_constraintStart_toEndOf="@+id/usernameOptions"
         app:layout_constraintTop_toTopOf="@+id/usernameOptions" />
 
@@ -92,6 +92,15 @@
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/darkModeSwitch" />
+
+    <Button
+        android:id="@+id/btnUsernameSaveOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginSmall"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/inputUsernameOptions" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

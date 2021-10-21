@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // based on https://developer.android.com/guide/navigation/navigation-ui
+        // based on
+        // ANDROID DEVELOPERS, 2021. Update UI components with NavigationUI  |  Android Developers. [online]. Android Developers. Available from: https://developer.android.com/guide/navigation/navigation-ui [Accessed 21 October 2021].
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -48,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    // based on https://stackoverflow.com/questions/15560904/setting-custom-actionbar-title-from-fragment
+    // based on
+    // NOT_A_PROGRAMMER, 2015. Change ActionBar title using Fragments. [online]. Stack Overflow. Available from: https://stackoverflow.com/a/28453012/ [Accessed 21 October 2021].
     public void setAppBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }

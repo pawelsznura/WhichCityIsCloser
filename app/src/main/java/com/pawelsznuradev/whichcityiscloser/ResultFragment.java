@@ -49,6 +49,13 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // changing the title in case of lifecycle events like rotating the screen
+        ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleResultFragment));
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -68,13 +75,14 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
         Button btnNext = view.findViewById(R.id.btnNextResult);
         btnNext.setOnClickListener(this);
         // if user was wrong then change text of the button
+
         return view;
     }
 
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btnNextResult){
+        if (view.getId() == R.id.btnNextResult) {
             // if user was right then navigate to play fragment
             Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_playFragment);
             // if user was wrong then navigate to home fragment

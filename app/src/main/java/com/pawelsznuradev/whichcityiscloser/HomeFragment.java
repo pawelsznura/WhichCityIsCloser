@@ -80,10 +80,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        // based on Week 3 lecture slides
-        if (v.getId() == R.id.btnplayhome){
+        if (v.getId() == R.id.btnplayhome) {
             Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_playFragment);
-        }  else if (v.getId() == R.id.btnquithome){
+        } else if (v.getId() == R.id.btnquithome) {
             System.exit(0);
         }
 
@@ -94,8 +93,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
 
-        // set title bar https://stackoverflow.com/questions/28389841/change-actionbar-title-using-fragments/38224963
-        // set title during the first startup, in other cases the statement in onCreateView is enough
+        // set title during the first startup and in case of lifecycle events like rotating the screen
+        // based on
+        // NOT_A_PROGRAMMER, 2015. Change ActionBar title using Fragments. [online]. Stack Overflow. Available from: https://stackoverflow.com/a/28453012/ [Accessed 21 October 2021].
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleHomeFragment));
     }
 }

@@ -47,6 +47,13 @@ public class HighScoreFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // changing the title in case of lifecycle events like rotating the screen
+        ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleHighScoresFragment));
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {

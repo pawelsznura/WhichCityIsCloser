@@ -66,7 +66,7 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
     public void onResume() {
         super.onResume();
 
-        // set the title when dark mode is enabled, in other cases statement in onCreateView is enough
+        // changing the title in case of lifecycle events like rotating the screen, turning on dark mode
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleOptionsFragment));
 
     }
@@ -81,7 +81,8 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
 
 
         // Spinner for units selection Metric or Imperial
-        // based on https://developer.android.com/guide/topics/ui/controls/spinner
+        // based on
+        // ANDROID DEVELOPERS, 2021. Spinners  |  Android Developers. [online]. Android Developers. Available from: https://developer.android.com/guide/topics/ui/controls/spinner [Accessed 21 October 2021].
         Spinner spinner = (Spinner) view.findViewById(R.id.units_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.units_array, R.layout.support_simple_spinner_dropdown_item);
@@ -92,9 +93,9 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
         spinner.setOnItemSelectedListener(this);
 
 
-        // TODO dark mode on, switch off bug,
         // Switch for dark mode
-        // based on https://stackoverflow.com/questions/11278507/android-widget-switch-on-off-event-listener
+        // based on
+        // KOTHARI, S., 2013. android.widget.Switch - on/off event listener?. [online]. Stack Overflow. Available from: https://stackoverflow.com/a/14556746 [Accessed 21 October 2021].
         Switch darkModeSwitch = (Switch) view.findViewById(R.id.darkModeSwitch);
         darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

@@ -93,4 +93,216 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/item_list_username3"
         app:layout_constraintTop_toTopOf="@+id/item_list_username3" />
+
+    <TextView
+        android:id="@+id/item_list_username4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginBig"
+        android:layout_marginTop="@dimen/marginBig"
+        android:text="Keanu Reeves "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username3" />
+
+    <TextView
+        android:id="@+id/item_list_highscore4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginBig"
+        android:text="17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_list_username4"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username4" />
+
+    <TextView
+        android:id="@+id/item_list_username5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginBig"
+        android:layout_marginTop="@dimen/marginBig"
+        android:text="Keanu Reeves "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username4" />
+
+    <TextView
+        android:id="@+id/item_list_highscore5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginBig"
+        android:text="17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_list_username5"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username5" />
+
+    <TextView
+        android:id="@+id/item_list_username6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginBig"
+        android:layout_marginTop="@dimen/marginBig"
+        android:text="Keanu Reeves "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username5" />
+
+    <TextView
+        android:id="@+id/item_list_highscore6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginBig"
+        android:text="17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_list_username6"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username6" />
+
+    <TextView
+        android:id="@+id/item_list_username7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginBig"
+        android:layout_marginTop="@dimen/marginBig"
+        android:text="Keanu Reeves "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username6" />
+
+    <TextView
+        android:id="@+id/item_list_highscore7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginBig"
+        android:text="17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_list_username7"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username7" />
+
+    <TextView
+        android:id="@+id/item_list_username8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginBig"
+        android:layout_marginTop="@dimen/marginBig"
+        android:text="Keanu Reeves "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username7" />
+
+    <TextView
+        android:id="@+id/item_list_highscore8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginBig"
+        android:text="17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_list_username8"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username8" />
+
+    <TextView
+        android:id="@+id/item_list_username9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginBig"
+        android:layout_marginTop="@dimen/marginBig"
+        android:text="Keanu Reeves "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username8" />
+
+    <TextView
+        android:id="@+id/item_list_highscore9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginBig"
+        android:text="17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_list_username9"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username9" />
+
+    <TextView
+        android:id="@+id/item_list_username10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginBig"
+        android:layout_marginTop="@dimen/marginBig"
+        android:text="Keanu Reeves "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username9" />
+
+    <TextView
+        android:id="@+id/item_list_highscore10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginBig"
+        android:text="17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_list_username10"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username10" />
+
+    <TextView
+        android:id="@+id/item_list_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginBig"
+        android:layout_marginTop="@dimen/marginBig"
+        android:text=" "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username10" />
+
+    <TextView
+        android:id="@+id/item_list_empty1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginBig"
+        android:text=" "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_list_empty"
+        app:layout_constraintTop_toTopOf="@+id/item_list_empty" />
+
+    <TextView
+        android:id="@+id/item_list_username11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginBig"
+        android:layout_marginTop="@dimen/marginBig"
+        android:text="Local PLayer "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_empty" />
+
+    <TextView
+        android:id="@+id/item_list_highscore11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginBig"
+        android:text="8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_list_username11"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username11" />
+
+    <TextView
+        android:id="@+id/item_list_username12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginBig"
+        android:layout_marginTop="@dimen/marginBig"
+        android:text="Local PLayer2 "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username11" />
+
+    <TextView
+        android:id="@+id/item_list_highscore12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginBig"
+        android:text="7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/item_list_username12"
+        app:layout_constraintTop_toTopOf="@+id/item_list_username12" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
