@@ -12,8 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +91,48 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_play, container, false);
 
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titlePlayFragment));
+
+
+        // get data from API
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("x-rapidapi-host", "wft-geo-db.p.rapidapi.com");
+        headers.put("x-rapidapi-key", "ce749f2f6dmsh27fdfbb7699816ep1dfcb4jsn587e74ca313f");
+
+        String url = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Log.e("response", response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("error on response", "error");
+            }
+
+        }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("x-rapidapi-host", "wft-geo-db.p.rapidapi.com");
+                params.put("x-rapidapi-key", "ce749f2f6dmsh27fdfbb7699816ep1dfcb4jsn587e74ca313f");
+
+                return params;
+            }
+        };
+        ;
+
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        queue.add(stringRequest);
 
 
         Button btnCity1 = view.findViewById(R.id.btnCity1Play);
