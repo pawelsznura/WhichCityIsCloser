@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -99,14 +100,16 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         headers.put("x-rapidapi-host", "wft-geo-db.p.rapidapi.com");
         headers.put("x-rapidapi-key", "ce749f2f6dmsh27fdfbb7699816ep1dfcb4jsn587e74ca313f");
 
-        String url = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10";
+        String url = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=5&offset=0";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            Log.e("response", response);
+                            JSONArray data =  jsonObject.getJSONArray("data");
+                            City city = new City(data.getJSONObject(0));
+                            Log.e("city", city.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
