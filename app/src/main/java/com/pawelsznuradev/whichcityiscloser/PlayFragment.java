@@ -2,7 +2,6 @@ package com.pawelsznuradev.whichcityiscloser;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -13,24 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 
@@ -124,46 +110,14 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
         // get data from API
 
-        Map<String, String> headers = new HashMap<>();
-        headers.put("x-rapidapi-host", "wft-geo-db.p.rapidapi.com");
-        headers.put("x-rapidapi-key", "ce749f2f6dmsh27fdfbb7699816ep1dfcb4jsn587e74ca313f");
+        GeoDbApiService apiService = new GeoDbApiService(getContext());
 
-        String url = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=5&offset=0";
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            JSONArray data = jsonObject.getJSONArray("data");
-                            City city = new City(data.getJSONObject(0));
-                            Log.e("city", city.toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
+        int distance = apiService.getDistanceCities(cityQuestion.getId(), city1.getId());
+//        StringRequest stringRequest = apiService.getExampleCity();
 
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("error on response", "error");
-            }
 
-        }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("x-rapidapi-host", "wft-geo-db.p.rapidapi.com");
-                params.put("x-rapidapi-key", "ce749f2f6dmsh27fdfbb7699816ep1dfcb4jsn587e74ca313f");
-
-                return params;
-            }
-        };
-        ;
-
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-        queue.add(stringRequest);
+//        RequestQueue queue = Volley.newRequestQueue(getContext());
+//        queue.add(stringRequest);
 
 
         Button btnCity1 = view.findViewById(R.id.btnCity1Play);
