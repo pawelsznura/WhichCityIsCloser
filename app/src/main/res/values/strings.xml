@@ -49,4 +49,5 @@
     <string name="high_scores">High Scores</string>
     <string name="options">Options</string>
     <string name="save">Save</string>
+    <string name="which_city_is_closer_to_text">Which city is closer to Sydney?</string>
 </resources>

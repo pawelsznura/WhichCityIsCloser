@@ -11,11 +11,11 @@ import org.json.JSONObject;
 
 public class City {
 
-    int id;
-    String wikiDataId;
-    String name;
-    double latitude;
-    double longitude;
+    private int id;
+    private String wikiDataId;
+    private String name;
+    private double latitude;
+    private double longitude;
 
 
     public City(JSONObject response) {
@@ -32,7 +32,11 @@ public class City {
 
     }
 
-    public City(int id, String wikiDataId, String name, double latitude, double longitude) {
+    public City(int id,
+                String wikiDataId,
+                String name,
+                double longitude,
+                double latitude) {
         this.id = id;
         this.wikiDataId = wikiDataId;
         this.name = name;
@@ -44,5 +48,46 @@ public class City {
     @Override
     public String toString() {
         return "name = " + name;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getWikiDataId() {
+        return wikiDataId;
+    }
+
+    public void setWikiDataId(String wikiDataId) {
+        this.wikiDataId = wikiDataId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }
