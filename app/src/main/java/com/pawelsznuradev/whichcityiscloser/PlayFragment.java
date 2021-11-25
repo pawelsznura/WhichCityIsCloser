@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -38,6 +42,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
     private String mParam2;
 
     int distanceCity1;
+    int distanceCity2;
 
 
     Bundle bundle = new Bundle();
@@ -113,20 +118,18 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         City city2 = listOfCities.get(random2);
         City cityQuestion = listOfCities.get(random3);
 
-
         // get data from API
 
-        GeoDbApiService apiService = new GeoDbApiService(getContext());
+        GeoDbApiService apiService = new GeoDbApiService(getContext(), bundle);
 
-        distanceCity1 = apiService.getDistanceCities(cityQuestion.getId(), city1.getId());
-        int distanceCity2 = apiService.getDistanceCities(cityQuestion.getId(), city2.getId());
+        apiService.getDistanceCities(cityQuestion.getId(), city1.getId(), "distanceCityA1");
+        apiService.getDistanceCities(cityQuestion.getId(), city2.getId(), "distanceCityA2");
 
-        // putting the data into the bundle
+        // putting local data into bundle
         bundle.putString("cityQname", cityQuestion.getName());
         bundle.putString("cityA1name", city1.getName());
         bundle.putString("cityA2name", city2.getName());
-        bundle.putInt("distanceCityA1", distanceCity1);
-        bundle.putInt("distanceCityA2", distanceCity2);
+
 
 
         Button btnCity1 = view.findViewById(R.id.btnCity1Play);
@@ -143,18 +146,17 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    private void putIntoBundle() {
 
-    }
 
 
     @Override
     public void onClick(View view) {
 
         if (view.getId() == R.id.btnCity1Play) {
-//            putIntoBundle();
+            bundle.putInt("selectedCity",1);
             Navigation.findNavController(view).navigate(R.id.action_playFragment_to_resultFragment, bundle);
         } else if (view.getId() == R.id.btnCity2Play) {
+            bundle.putInt("selectedCity",2);
             Navigation.findNavController(view).navigate(R.id.action_playFragment_to_resultFragment, bundle);
         }
     }
@@ -186,41 +188,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         return arrayList;
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.e("onSaveInstanceState", String.valueOf(distanceCity1));
 
-        Log.e("distanceCity1", String.valueOf(distanceCity1));
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onPause() {
-        Log.e("onPause", String.valueOf(distanceCity1));
-
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        Log.e("onStop", String.valueOf(distanceCity1));
-
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.e("onDestroy", String.valueOf(distanceCity1));
-
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDestroyView() {
-        Log.e("onDestroyView", String.valueOf(distanceCity1));
-
-        super.onDestroyView();
-    }
 
 
 }

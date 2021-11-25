@@ -91,6 +91,10 @@
             android:name="distanceCityA2"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument
+            android:name="selectedCity"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/highScoreFragment"
