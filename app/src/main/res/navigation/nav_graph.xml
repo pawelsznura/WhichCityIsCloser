@@ -72,6 +72,25 @@
         <action
             android:id="@+id/action_resultFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="cityQname"
+            app:argType="string"
+            android:defaultValue="City_name" />
+        <argument android:name="cityA1name"
+            app:argType="string"
+            android:defaultValue="City_name_A1" />
+        <argument
+            android:name="cityA2name"
+            app:argType="string"
+            android:defaultValue="City_name_A2" />
+        <argument
+            android:name="distanceCityA1"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="distanceCityA2"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/highScoreFragment"

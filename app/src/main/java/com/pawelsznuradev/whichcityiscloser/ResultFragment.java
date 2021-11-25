@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,10 +22,18 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String CITYQNAME = "cityQname";
+    private static final String CITYA1NAME = "cityA1name";
+    private static final String CITYA2NAME = "cityA2name";
+    private static final String DISTANCECITYA1 = "distanceCityA1";
+    private static final String DISTANCECITYA2 = "distanceCityA2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String cityQname;
+    private String cityA1name;
+    private String cityA2name;
+    private int distanceCityA1;
+    private int distanceCityA2;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -34,16 +43,18 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param cityQname name of the city in the question.
      * @return A new instance of fragment ResultFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ResultFragment newInstance(String param1, String param2) {
+    public static ResultFragment newInstance(String cityQname, String cityA1name, String cityA2name, int distanceCityA1, int distanceCityA2) {
         ResultFragment fragment = new ResultFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(CITYQNAME, cityQname);
+        args.putString(CITYA1NAME, cityA1name);
+        args.putString(CITYA2NAME, cityA2name);
+        args.putInt(DISTANCECITYA1, distanceCityA1);
+        args.putInt(DISTANCECITYA2, distanceCityA2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,8 +70,11 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            cityQname = getArguments().getString(CITYQNAME);
+            cityA1name = getArguments().getString(CITYA1NAME);
+            cityA2name = getArguments().getString(CITYA2NAME);
+            distanceCityA1 = getArguments().getInt(DISTANCECITYA1);
+            distanceCityA2 = getArguments().getInt(DISTANCECITYA2);
         }
     }
 
@@ -75,6 +89,12 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
         Button btnNext = view.findViewById(R.id.btnNextResult);
         btnNext.setOnClickListener(this);
         // if user was wrong then change text of the button
+
+        TextView city1resultTextView = view.findViewById(R.id.city1ResultText);
+        city1resultTextView.setText(String.format("%s is %d miles away", cityA1name, distanceCityA1));
+
+        TextView city2resultTextView = view.findViewById(R.id.city2ResultText);
+        city2resultTextView.setText(String.format("%s is %d miles away", cityA2name, distanceCityA2));
 
         return view;
     }

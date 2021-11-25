@@ -61,9 +61,7 @@ public class GeoDbApiService {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Log.e("response", String.valueOf(response));
                             distance[0] = response.getInt("data");
-                            Log.e("responseDIStance", String.valueOf(distance[0]));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -89,9 +87,6 @@ public class GeoDbApiService {
 
     @NonNull
     public StringRequest getExampleCity() {
-//        Map<String, String> headers = new HashMap<>();
-//        headers.put("x-rapidapi-host", "wft-geo-db.p.rapidapi.com");
-//        headers.put("x-rapidapi-key", "ce749f2f6dmsh27fdfbb7699816ep1dfcb4jsn587e74ca313f");
 
         String url = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=5&offset=0";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
