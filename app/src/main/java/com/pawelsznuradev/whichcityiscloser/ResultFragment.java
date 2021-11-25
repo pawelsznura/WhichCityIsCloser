@@ -36,6 +36,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
     private int distanceCityA1;
     private int distanceCityA2;
     private int selectedCity;
+    private boolean userWasCorrect;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -79,6 +80,25 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
             distanceCityA1 = getArguments().getInt(DISTANCECITYA1);
             distanceCityA2 = getArguments().getInt(DISTANCECITYA2);
             selectedCity = getArguments().getInt(SELECTEDCITY);
+            if (distanceCityA1 < distanceCityA2) {
+                // A1 is correct
+                if (selectedCity == 1) {
+                    // user was correct
+                    userWasCorrect = true;
+                } else if (selectedCity == 2) {
+                    // user was wrong
+                    userWasCorrect = false;
+                }
+            } else {
+                // A2 is correct
+                if (selectedCity == 2) {
+                    // user was correct
+                    userWasCorrect = true;
+                } else if (selectedCity == 1) {
+                    // user was wrong
+                    userWasCorrect = false;
+                }
+            }
         }
     }
 
@@ -137,7 +157,12 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view.getId() == R.id.btnNextResult) {
             // if user was right then navigate to play fragment
-            Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_playFragment);
+            if (userWasCorrect){
+                Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_playFragment);
+
+            } else {
+                Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_homeFragment);
+            }
             // if user was wrong then navigate to home fragment
 //            Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_homeFragment);
         }
