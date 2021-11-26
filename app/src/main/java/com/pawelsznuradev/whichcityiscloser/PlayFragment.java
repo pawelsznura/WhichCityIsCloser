@@ -2,27 +2,17 @@ package com.pawelsznuradev.whichcityiscloser;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 
 /**
@@ -122,6 +112,9 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
         GeoDbApiService apiService = new GeoDbApiService(getContext(), bundle);
 
+        apiService.getCityDetailsByName("Aberdeen");
+
+
         apiService.getDistanceCities(cityQuestion.getId(), city1.getId(), "distanceCityA1");
         apiService.getDistanceCities(cityQuestion.getId(), city2.getId(), "distanceCityA2");
 
@@ -129,7 +122,6 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         bundle.putString("cityQname", cityQuestion.getName());
         bundle.putString("cityA1name", city1.getName());
         bundle.putString("cityA2name", city2.getName());
-
 
 
         Button btnCity1 = view.findViewById(R.id.btnCity1Play);
@@ -147,16 +139,14 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
-
     @Override
     public void onClick(View view) {
 
         if (view.getId() == R.id.btnCity1Play) {
-            bundle.putInt("selectedCity",1);
+            bundle.putInt("selectedCity", 1);
             Navigation.findNavController(view).navigate(R.id.action_playFragment_to_resultFragment, bundle);
         } else if (view.getId() == R.id.btnCity2Play) {
-            bundle.putInt("selectedCity",2);
+            bundle.putInt("selectedCity", 2);
             Navigation.findNavController(view).navigate(R.id.action_playFragment_to_resultFragment, bundle);
         }
     }
@@ -187,8 +177,6 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
         return arrayList;
     }
-
-
 
 
 }

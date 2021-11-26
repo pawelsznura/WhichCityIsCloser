@@ -135,10 +135,10 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
                 cityQuestionTextView.setText(String.format("%s Correct!", cityQname));
             } else if (selectedCity == 1) {
                 // user was wrong
-                cityQuestionTextView.setText(String.format("%s Wrong!", cityQname));
+                cityQuestionTextView.setText(String.format("%s  Wrong!", cityQname));
             } else {
                 // selection error
-                cityQuestionTextView.setText(String.format("%s Error", cityQname));
+                cityQuestionTextView.setText(String.format("%s  Error", cityQname));
             }
         }
 
@@ -157,7 +157,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view.getId() == R.id.btnNextResult) {
             // if user was right then navigate to play fragment
-            if (userWasCorrect){
+            if (userWasCorrect) {
                 Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_playFragment);
 
             } else {
