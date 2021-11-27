@@ -24,15 +24,11 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String SCORE = "score";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    int distanceCity1;
-    int distanceCity2;
+    private int score;
 
 
     Bundle bundle = new Bundle();
@@ -51,11 +47,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
      * @return A new instance of fragment PlayFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PlayFragment newInstance(String param1, String param2) {
+    public static PlayFragment newInstance(int score) {
         PlayFragment fragment = new PlayFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(SCORE, score);
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,8 +59,8 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            score = getArguments().getInt(SCORE);
+            bundle.putInt(SCORE, score);
         }
     }
 
@@ -134,6 +129,9 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
         TextView playText = view.findViewById(R.id.whichCityIsCloserPlayText);
         playText.setText(String.format("Which city is closer to %s?", cityQuestion.getName()));
+
+        TextView scoreTextView = view.findViewById(R.id.scoreResultText);
+        scoreTextView.setText(String.format("Your score: %s", score));
 
         return view;
     }

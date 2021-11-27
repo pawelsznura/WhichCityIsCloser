@@ -55,6 +55,10 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/homeFragment" />
+        <argument
+            android:name="score"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
@@ -94,6 +98,10 @@
             android:defaultValue="0" />
         <argument
             android:name="selectedCity"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="score"
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
