@@ -133,6 +133,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
         bundle.putString("cityA1name", city1.getName());
         bundle.putString("cityA2name", city2.getName());
 
+        bundle.putParcelable("CityQ", cityQuestion);
+        bundle.putParcelable("CityA1", city1);
+        bundle.putParcelable("CityA2", city2);
+
 
         Button btnCity1 = view.findViewById(R.id.btnCity1Play);
         btnCity1.setText(city1.getName());

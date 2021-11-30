@@ -1,5 +1,8 @@
 package com.pawelsznuradev.whichcityiscloser.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -14,7 +17,7 @@ import org.json.JSONObject;
  */
 
 @Entity(tableName = "City")
-public class City {
+public class City implements Parcelable {
     /**
      * Example:
      * "id":45633
@@ -181,5 +184,28 @@ public class City {
 
     public void setRegionCode(String regionCode) {
         this.regionCode = regionCode;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(wikiDataId);
+        parcel.writeString(type);
+        parcel.writeString(city);
+        parcel.writeString(name);
+        parcel.writeString(country);
+        parcel.writeString(countryCode);
+        parcel.writeString(region);
+        parcel.writeString(regionCode);
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
+        parcel.writeInt(population);
+
     }
 }

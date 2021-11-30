@@ -2,6 +2,7 @@ package com.pawelsznuradev.whichcityiscloser;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -11,38 +12,51 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.pawelsznuradev.whichcityiscloser.data.City;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ResultFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ResultFragment extends Fragment implements View.OnClickListener {
+public class ResultFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private static final String CITYQNAME = "cityQname";
-    private static final String CITYA1NAME = "cityA1name";
-    private static final String CITYA2NAME = "cityA2name";
+
+
     private static final String DISTANCECITYA1 = "distanceCityA1";
     private static final String DISTANCECITYA2 = "distanceCityA2";
     private static final String SELECTEDCITY = "selectedCity";
     private static final String SCORE = "score";
+    private static final String CITYQ = "CityQ";
+    private static final String CITYA1 = "CityA1";
+    private static final String CITYA2 = "CityA2";
 
 
     // TODO: Rename and change types of parameters
-    private String cityQname;
-    private String cityA1name;
-    private String cityA2name;
+
     private int distanceCityA1;
     private int distanceCityA2;
     private int selectedCity;
     private int score;
+    private City cityQ;
+    private City cityA1;
+    private City cityA2;
 
     private boolean userWasCorrect;
 
     Bundle bundle = new Bundle();
+
+    MapView mapView;
+    GoogleMap googleMap;
+
 
     public ResultFragment() {
         // Required empty public constructor
@@ -52,43 +66,41 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param cityQname name of the city in the question.
+     * @param cityQ the city in the question.
      * @return A new instance of fragment ResultFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ResultFragment newInstance(String cityQname, String cityA1name, String cityA2name, int distanceCityA1, int distanceCityA2, int selectedCity, int score) {
+    public static ResultFragment newInstance(int distanceCityA1, int distanceCityA2, int selectedCity, int score, City cityQ, City cityA1, City cityA2) {
         ResultFragment fragment = new ResultFragment();
         Bundle args = new Bundle();
-        args.putString(CITYQNAME, cityQname);
-        args.putString(CITYA1NAME, cityA1name);
-        args.putString(CITYA2NAME, cityA2name);
+
         args.putInt(DISTANCECITYA1, distanceCityA1);
         args.putInt(DISTANCECITYA2, distanceCityA2);
         args.putInt(SELECTEDCITY, selectedCity);
         args.putInt(SCORE, score);
+        args.putParcelable(CITYQ, cityQ);
+        args.putParcelable(CITYA1, cityA1);
+        args.putParcelable(CITYA2, cityA2);
+
 
         fragment.setArguments(args);
         return fragment;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        // changing the title in case of lifecycle events like rotating the screen
-        ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleResultFragment));
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            cityQname = getArguments().getString(CITYQNAME);
-            cityA1name = getArguments().getString(CITYA1NAME);
-            cityA2name = getArguments().getString(CITYA2NAME);
+
             distanceCityA1 = getArguments().getInt(DISTANCECITYA1);
             distanceCityA2 = getArguments().getInt(DISTANCECITYA2);
             selectedCity = getArguments().getInt(SELECTEDCITY);
             score = getArguments().getInt(SCORE);
+            cityQ = getArguments().getParcelable(CITYQ);
+            cityA1 = getArguments().getParcelable(CITYA1);
+            cityA2 = getArguments().getParcelable(CITYA2);
+
             if (distanceCityA1 < distanceCityA2) {
                 // A1 is correct
                 if (selectedCity == 1) {
@@ -120,6 +132,12 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_result, container, false);
+
+        mapView = (MapView) view.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+
+        mapView.getMapAsync(this);
+
 
         Button btnNext = view.findViewById(R.id.btnNextResult);
         btnNext.setOnClickListener(this);
@@ -158,10 +176,10 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
 
 
         TextView city1resultTextView = view.findViewById(R.id.city1ResultText);
-        city1resultTextView.setText(String.format("%s is %d miles away from %s", cityA1name, distanceCityA1, cityQname));
+        city1resultTextView.setText(String.format("%s is %d miles away from %s", cityA1.getName(), distanceCityA1, cityQ.getName()));
 
         TextView city2resultTextView = view.findViewById(R.id.city2ResultText);
-        city2resultTextView.setText(String.format("%s is %d miles away from %s", cityA2name, distanceCityA2, cityQname));
+        city2resultTextView.setText(String.format("%s is %d miles away from %s", cityA2.getName(), distanceCityA2, cityQ.getName()));
 
         TextView scoreTextView = view.findViewById(R.id.scoreResultText);
         scoreTextView.setText(String.format("Your score: %s", score));
@@ -186,5 +204,55 @@ public class ResultFragment extends Fragment implements View.OnClickListener {
             // if user was wrong then navigate to home fragment
 //            Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_homeFragment);
         }
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        googleMap = googleMap;
+
+
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(cityQ.getLatitude(), cityQ.getLongitude()))
+                .title(cityQ.getName()));
+
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(cityA1.getLatitude(), cityA1.getLongitude()))
+                .title(cityA1.getName()));
+
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(cityA2.getLatitude(), cityA2.getLongitude()))
+                .title(cityA2.getName()));
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(cityQ.getLatitude(), cityQ.getLongitude())));
+
+    }
+
+
+    @Override
+    public void onResume() {
+        // changing the title in case of lifecycle events like rotating the screen
+        ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleResultFragment));
+
+        mapView.onResume();
+        super.onResume();
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
     }
 }

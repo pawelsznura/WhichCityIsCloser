@@ -8,16 +8,17 @@
     android:theme="@style/MyFragment"
     tools:context=".ResultFragment">
 
-    <!--  this image is a placeholder for a interactive map  -->
-    <ImageView
-        android:id="@+id/imageView3"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/map_result"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
 
 
     <TextView
@@ -29,7 +30,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
     <TextView
         android:id="@+id/scoreResultText"
