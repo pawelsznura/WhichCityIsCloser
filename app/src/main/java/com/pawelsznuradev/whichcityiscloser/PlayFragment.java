@@ -1,11 +1,8 @@
 package com.pawelsznuradev.whichcityiscloser;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -20,6 +17,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.pawelsznuradev.whichcityiscloser.data.City;
+import com.pawelsznuradev.whichcityiscloser.data.GeoDbApiService;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -43,8 +43,15 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
 
     Bundle bundle = new Bundle();
 
+    // getting a sample list of cities
+    ArrayList<City> listOfCities = createListOfCities();
+
     MapView mapView;
     GoogleMap map;
+
+    City city1;
+    City city2;
+    City cityQuestion;
 
 
     public PlayFragment() {
@@ -74,6 +81,26 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
             score = getArguments().getInt(SCORE);
             bundle.putInt(SCORE, score);
         }
+        Random rand = new Random();
+
+        int random1 = rand.nextInt(listOfCities.size());
+        int random2 = rand.nextInt(listOfCities.size());
+        int random3 = rand.nextInt(listOfCities.size());
+
+        while (random1 == random2) {
+//            make sure the numbers are not the same
+            random2 = rand.nextInt(listOfCities.size());
+        }
+        while (random1 == random3 || random2 == random3) {
+//            make sure the numbers are not the same
+            random3 = rand.nextInt(listOfCities.size());
+        }
+
+
+        city1 = listOfCities.get(random1);
+        city2 = listOfCities.get(random2);
+        cityQuestion = listOfCities.get(random3);
+
     }
 
     @Override
@@ -91,39 +118,15 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
 
         mapView.getMapAsync(this);
 
-        Random rand = new Random();
-
-        // getting a sample list of cities
-        ArrayList<City> listOfCities = createListOfCities();
-
-
-        int random1 = rand.nextInt(listOfCities.size());
-        int random2 = rand.nextInt(listOfCities.size());
-        int random3 = rand.nextInt(listOfCities.size());
-
-        while (random1 == random2) {
-//            make sure the numbers are not the same
-            random2 = rand.nextInt(listOfCities.size());
-        }
-        while (random1 == random3 || random2 == random3) {
-//            make sure the numbers are not the same
-            random3 = rand.nextInt(listOfCities.size());
-        }
-
-
-        City city1 = listOfCities.get(random1);
-        City city2 = listOfCities.get(random2);
-        City cityQuestion = listOfCities.get(random3);
 
         // get data from API
 
         GeoDbApiService apiService = new GeoDbApiService(getContext(), bundle);
 
-        apiService.getCityDetailsByName("Aberdeen");
-
 
         apiService.getDistanceCities(cityQuestion.getId(), city1.getId(), "distanceCityA1");
         apiService.getDistanceCities(cityQuestion.getId(), city2.getId(), "distanceCityA2");
+
 
         // putting local data into bundle
         bundle.putString("cityQname", cityQuestion.getName());
@@ -164,26 +167,26 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
     public ArrayList<City> createListOfCities() {
 //        this function creates a small list of cities for easier testing
         ArrayList<City> arrayList = new ArrayList<>();
-        arrayList.add(new City(45633, "Q84", "London", 1.0, 1.0));
-        arrayList.add(new City(144809, "Q2379199", "Edinburgh", 1.0, 1.0));
-        arrayList.add(new City(84640, "Q585", "Oslo", 1.0, 1.0));
-        arrayList.add(new City(47394, "Q36405", "Aberdeen", 1.0, 1.0));
-        arrayList.add(new City(3453309, "Q64", "Berlin", 1.0, 1.0));
-        arrayList.add(new City(144571, "Q90", "Paris", 1.0, 1.0));
-        arrayList.add(new City(3097353, "Q727", "Amsterdam", 1.0, 1.0));
-        arrayList.add(new City(3452878, "Q220", "Rome", 1.0, 1.0));
-        arrayList.add(new City(30988, "Q2807", "Madrid", 1.0, 1.0));
-        arrayList.add(new City(160049, "Q597", "Lisbon", 1.0, 1.0));
-        arrayList.add(new City(3453194, "Q649", "Moscow", 1.0, 1.0));
-        arrayList.add(new City(92150, "Q270", "Warsaw", 1.0, 1.0));
-        arrayList.add(new City(51643, "Q1781", "Budapest", 1.0, 1.0));
-        arrayList.add(new City(3453053, "Q1741", "Vienna", 1.0, 1.0));
-        arrayList.add(new City(25261, "Q1748", "Copenhagen", 1.0, 1.0));
-        arrayList.add(new City(34314, "Q1757", "Helsinki", 1.0, 1.0));
-        arrayList.add(new City(3020322, "Q1754", "Stockholm", 1.0, 1.0));
-        arrayList.add(new City(48676, "Q1524", "Athens", 1.0, 1.0));
-        arrayList.add(new City(3453093, "Q19660", "Bucharest", 1.0, 1.0));
-        arrayList.add(new City(7448, "Q472", "Sofia", 1.0, 1.0));
+        arrayList.add(new City(45633, "Q84", "London", -0.1275, 51.507222222));
+        arrayList.add(new City(144809, "Q2379199", "Edinburgh", -3.19333, 55.94973));
+        arrayList.add(new City(84640, "Q585", "Oslo", 10.752777777, 59.911111111));
+        arrayList.add(new City(47394, "Q36405", "Aberdeen", -2.1, 57.15));
+        arrayList.add(new City(3453309, "Q64", "Berlin", 13.383333333, 52.516666666));
+        arrayList.add(new City(144571, "Q90", "Paris", 2.351388888, 48.856944444));
+        arrayList.add(new City(3097353, "Q727", "Amsterdam", 4.9, 52.383333333));
+        arrayList.add(new City(3452878, "Q220", "Rome", 12.482777777, 41.893055555));
+        arrayList.add(new City(30988, "Q2807", "Madrid", -3.691944444, 40.418888888));
+        arrayList.add(new City(160049, "Q597", "Lisbon", -9.13333, 38.71667));
+        arrayList.add(new City(3453194, "Q649", "Moscow", 37.617777777, 55.755833333));
+        arrayList.add(new City(92150, "Q270", "Warsaw", 21.033333333, 52.216666666));
+        arrayList.add(new City(51643, "Q1781", "Budapest", 19.040833333, 47.498333333));
+        arrayList.add(new City(3453053, "Q1741", "Vienna", 16.373064, 48.20833));
+        arrayList.add(new City(25261, "Q1748", "Copenhagen", 12.568888888, 55.676111111));
+        arrayList.add(new City(34314, "Q1757", "Helsinki", 24.93417, 60.17556));
+        arrayList.add(new City(3020322, "Q1754", "Stockholm", 18.068611111, 59.329444444));
+        arrayList.add(new City(48676, "Q1524", "Athens", 23.72784, 37.98376));
+        arrayList.add(new City(3453093, "Q19660", "Bucharest", 26.083333333, 44.4));
+        arrayList.add(new City(7448, "Q472", "Sofia", 23.321726, 42.697886));
 
         return arrayList;
     }
@@ -192,20 +195,15 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         map = googleMap;
-        map.getUiSettings().setMyLocationButtonEnabled(false);
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missind thg permissions, anen overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        map.setMyLocationEnabled(true);
 
-        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(43.1, -87.9)));
+
+        LatLng cityCords = new LatLng(cityQuestion.getLatitude(), cityQuestion.getLongitude());
+        String cityName = cityQuestion.getName();
+        map.addMarker(new MarkerOptions()
+                .position(cityCords)
+                .title(cityName));
+
+        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(cityQuestion.getLatitude(), cityQuestion.getLongitude())));
 
     }
 

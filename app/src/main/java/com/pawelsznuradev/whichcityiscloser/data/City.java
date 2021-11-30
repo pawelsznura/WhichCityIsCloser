@@ -1,6 +1,10 @@
-package com.pawelsznuradev.whichcityiscloser;
+package com.pawelsznuradev.whichcityiscloser.data;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,6 +13,7 @@ import org.json.JSONObject;
  * Created by Pawel Sznura on 24/11/2021.
  */
 
+@Entity(tableName = "City")
 public class City {
     /**
      * Example:
@@ -26,6 +31,8 @@ public class City {
      * "population":8908081
      */
 
+    @NonNull
+    @PrimaryKey
     private int id;
     private String wikiDataId;
     private String type;
