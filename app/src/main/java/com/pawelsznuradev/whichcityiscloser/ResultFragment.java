@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pawelsznuradev.whichcityiscloser.cityData.City;
+import com.pawelsznuradev.whichcityiscloser.highscore.Highscore;
+import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDao;
+import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +48,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String UNIT = "unit";
+    public static final String USERNAME = "username";
 
 
     // TODO: Rename and change types of parameters
@@ -147,6 +152,11 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
 
     }
 
+    private String getUsername() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(USERNAME, "");
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -178,6 +188,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
             } else if (selectedCity == 2) {
                 // user was wrong
                 cityQuestionTextView.setText("Wrong!");
+                saveHighscore();
             } else {
                 // selection error
                 cityQuestionTextView.setText("Error");
@@ -210,6 +221,24 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
 
 
         return view;
+    }
+
+    private void saveHighscore() {
+        // get database for storing the highscore
+        HighscoreDatabase highscoreDatabase = HighscoreDatabase.getDatabase(getContext());
+        // get the DAO for Highscores
+        HighscoreDao highscoreDao = highscoreDatabase.highscoreDao();
+
+        String name = getUsername();
+
+        Highscore highscore = new Highscore(name, score);
+
+
+        
+        highscoreDao.insert(highscore);
+
+//        Log.e("Highscore", highscore.toString());
+
     }
 
 
