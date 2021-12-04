@@ -13,8 +13,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
@@ -39,7 +39,7 @@
         android:layout_marginTop="@dimen/marginMedium"
         android:text="@string/score"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnNextResult"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/city1ResultText" />
@@ -47,7 +47,7 @@
     <TextView
         android:id="@+id/city1ResultText"
         android:layout_width="151dp"
-        android:layout_height="80dp"
+        android:layout_height="120dp"
         android:layout_marginTop="@dimen/marginBig"
         android:text="@string/city1result"
         android:textAlignment="center"
@@ -60,7 +60,7 @@
     <TextView
         android:id="@+id/city2ResultText"
         android:layout_width="151dp"
-        android:layout_height="80dp"
+        android:layout_height="120dp"
         android:text="@string/city2result"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -73,11 +73,10 @@
         android:id="@+id/btnNextResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginMedium"
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scoreResultText" />
+        app:layout_constraintStart_toEndOf="@+id/scoreResultText"
+        app:layout_constraintTop_toTopOf="@+id/scoreResultText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
