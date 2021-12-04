@@ -1,6 +1,13 @@
-package com.pawelsznuradev.whichcityiscloser;
+package com.pawelsznuradev.whichcityiscloser.data;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,7 +16,8 @@ import org.json.JSONObject;
  * Created by Pawel Sznura on 24/11/2021.
  */
 
-public class City {
+@Entity(tableName = "City")
+public class City implements Parcelable {
     /**
      * Example:
      * "id":45633
@@ -26,6 +34,8 @@ public class City {
      * "population":8908081
      */
 
+    @NonNull
+    @PrimaryKey
     private int id;
     private String wikiDataId;
     private String type;
@@ -174,5 +184,28 @@ public class City {
 
     public void setRegionCode(String regionCode) {
         this.regionCode = regionCode;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(wikiDataId);
+        parcel.writeString(type);
+        parcel.writeString(city);
+        parcel.writeString(name);
+        parcel.writeString(country);
+        parcel.writeString(countryCode);
+        parcel.writeString(region);
+        parcel.writeString(regionCode);
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
+        parcel.writeInt(population);
+
     }
 }

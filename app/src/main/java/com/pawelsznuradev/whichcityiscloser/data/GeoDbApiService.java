@@ -1,4 +1,4 @@
-package com.pawelsznuradev.whichcityiscloser;
+package com.pawelsznuradev.whichcityiscloser.data;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -66,8 +66,41 @@ public class GeoDbApiService {
 //        Log.e("country name", Arrays.toString(countrynames));
     }
 
+    public void getCityDetailsByID(String id) {
+//        'https://wft-geo-db.p.rapidapi.com/v1/geo/cities/Q60'
+        String url = BASEURL + CITIES + "/" + id;
+//        Log.e("url", url);
 
-    public void getCityDetailsByName(String name) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+//                        Log.e("response", response.toString());
+                        try {
+                            City city = new City(response.getJSONObject("data"));
+                            Log.e(city.getName() + "lat", String.valueOf(city.getLatitude()));
+                            Log.e(city.getName() + "long", String.valueOf(city.getLongitude()));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("error on response", String.valueOf(error));
+            }
+        }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return headerArgs;
+            }
+        };
+        queue.add(jsonObjectRequest);
+    }
+
+
+    public void getCitiesListDetailsByName(String name) {
 //        https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=London&sort=-population
         String url = BASEURL + CITIES + "?" + NAMEPREFIX + name + "&" + SORT + POPULATIONDESC;
 //        Log.e("url", url);
@@ -82,7 +115,8 @@ public class GeoDbApiService {
                             for (int i = 0; i < dataArray.length(); i++) {
 
                                 City city = new City(dataArray.getJSONObject(i));
-                                Log.e("city", city.toString());
+                                Log.e(city.getName() + "lat", String.valueOf(city.getLatitude()));
+                                Log.e(city.getName() + "long", String.valueOf(city.getLongitude()));
                             }
 
                         } catch (JSONException e) {
