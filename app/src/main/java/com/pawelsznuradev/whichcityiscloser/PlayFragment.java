@@ -20,8 +20,8 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.pawelsznuradev.whichcityiscloser.data.City;
-import com.pawelsznuradev.whichcityiscloser.data.GeoDbApiService;
+import com.pawelsznuradev.whichcityiscloser.cityData.City;
+import com.pawelsznuradev.whichcityiscloser.cityData.GeoDbApiService;
 
 import java.util.ArrayList;
 import java.util.Random;

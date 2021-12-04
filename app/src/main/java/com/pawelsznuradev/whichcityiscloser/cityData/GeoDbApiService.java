@@ -1,4 +1,4 @@
-package com.pawelsznuradev.whichcityiscloser.data;
+package com.pawelsznuradev.whichcityiscloser.cityData;
 
 import android.content.Context;
 import android.os.Bundle;

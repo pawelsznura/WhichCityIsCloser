@@ -1,4 +1,4 @@
-package com.pawelsznuradev.whichcityiscloser.data;
+package com.pawelsznuradev.whichcityiscloser.cityData;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,8 +6,6 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,6 +80,33 @@ public class City implements Parcelable {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    protected City(Parcel in) {
+        id = in.readInt();
+        wikiDataId = in.readString();
+        type = in.readString();
+        city = in.readString();
+        name = in.readString();
+        country = in.readString();
+        countryCode = in.readString();
+        region = in.readString();
+        regionCode = in.readString();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        population = in.readInt();
+    }
+
+    public static final Creator<City> CREATOR = new Creator<City>() {
+        @Override
+        public City createFromParcel(Parcel in) {
+            return new City(in);
+        }
+
+        @Override
+        public City[] newArray(int size) {
+            return new City[size];
+        }
+    };
 
     @NonNull
     @Override

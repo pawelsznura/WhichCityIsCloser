@@ -1,4 +1,4 @@
-package com.pawelsznuradev.whichcityiscloser.data;
+package com.pawelsznuradev.whichcityiscloser.cityData;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

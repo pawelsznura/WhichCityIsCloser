@@ -20,7 +20,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.pawelsznuradev.whichcityiscloser.data.City;
+import com.pawelsznuradev.whichcityiscloser.cityData.City;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -186,13 +186,13 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
             // A2 is correct
             if (selectedCity == 2) {
                 // user was correct
-                cityQuestionTextView.setText("Correct!");
+                cityQuestionTextView.setText(R.string.answerCorrect);
             } else if (selectedCity == 1) {
                 // user was wrong
-                cityQuestionTextView.setText("Wrong!");
+                cityQuestionTextView.setText(R.string.answerWrong);
             } else {
                 // selection error
-                cityQuestionTextView.setText("Error");
+                cityQuestionTextView.setText(R.string.error);
             }
         }
 
