@@ -63,10 +63,10 @@
         android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameOptions" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUsernameOptions" />
 
     <EditText
-        android:id="@+id/inputUsernameOptions"
+        android:id="@+id/editTextUsernameOptions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginMedium"
@@ -76,11 +76,11 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toStartOf="@+id/btnUsernameSaveOptions"
-        app:layout_constraintStart_toEndOf="@+id/usernameOptions"
-        app:layout_constraintTop_toTopOf="@+id/usernameOptions" />
+        app:layout_constraintStart_toEndOf="@+id/textViewUsernameOptions"
+        app:layout_constraintTop_toTopOf="@+id/textViewUsernameOptions" />
 
     <TextView
-        android:id="@+id/usernameOptions"
+        android:id="@+id/textViewUsernameOptions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginSmall"
@@ -100,7 +100,7 @@
         android:layout_marginEnd="@dimen/marginSmall"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/inputUsernameOptions" />
+        app:layout_constraintTop_toTopOf="@+id/editTextUsernameOptions" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

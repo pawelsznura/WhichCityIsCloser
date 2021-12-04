@@ -1,18 +1,17 @@
 package com.pawelsznuradev.whichcityiscloser;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,10 +20,22 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String DARKMODE = "darkmode";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // setting dark mode if user had it enabled before
+        if (getDarkModeStatus()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
 
         // based on
         // ANDROID DEVELOPERS, 2021. Update UI components with NavigationUI  |  Android Developers. [online]. Android Developers. Available from: https://developer.android.com/guide/navigation/navigation-ui [Accessed 21 October 2021].
@@ -39,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
+    }
+
+    private boolean getDarkModeStatus() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(DARKMODE, false);
     }
 
 
