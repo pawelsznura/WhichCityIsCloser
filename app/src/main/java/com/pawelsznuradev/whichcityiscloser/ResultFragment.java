@@ -1,5 +1,7 @@
 package com.pawelsznuradev.whichcityiscloser;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -40,6 +42,10 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
     private static final String CITYA2 = "CityA2";
 
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String UNIT = "unit";
+
+
     // TODO: Rename and change types of parameters
 
     private int distanceCityA1;
@@ -53,6 +59,9 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
     private boolean userWasCorrect;
 
     Bundle bundle = new Bundle();
+
+    String units;
+
 
     MapView mapView;
     GoogleMap googleMap;
@@ -122,7 +131,20 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
                     userWasCorrect = false;
                 }
             }
+
+            units = getUnits();
         }
+    }
+
+    private String getUnits() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        if (sharedPreferences.getString(UNIT, "Imperial") == "Metric") {
+            return "KM";
+        } else {
+            return "MI";
+        }
+
+
     }
 
     @Override
@@ -176,10 +198,10 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
 
 
         TextView city1resultTextView = view.findViewById(R.id.city1ResultText);
-        city1resultTextView.setText(String.format("%s is %d miles away from %s", cityA1.getName(), distanceCityA1, cityQ.getName()));
+        city1resultTextView.setText(String.format("%s is %d %s away from %s", cityA1.getName(), distanceCityA1, units, cityQ.getName()));
 
         TextView city2resultTextView = view.findViewById(R.id.city2ResultText);
-        city2resultTextView.setText(String.format("%s is %d miles away from %s", cityA2.getName(), distanceCityA2, cityQ.getName()));
+        city2resultTextView.setText(String.format("%s is %d %s away from %s", cityA2.getName(), distanceCityA2, units, cityQ.getName()));
 
         TextView scoreTextView = view.findViewById(R.id.scoreResultText);
         scoreTextView.setText(String.format("Your score: %s", score));
@@ -199,10 +221,9 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
                 Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_playFragment, bundle);
 
             } else {
+                // if user was wrong then navigate to home fragment
                 Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_homeFragment, bundle);
             }
-            // if user was wrong then navigate to home fragment
-//            Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_homeFragment);
         }
     }
 

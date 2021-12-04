@@ -1,5 +1,7 @@
 package com.pawelsznuradev.whichcityiscloser;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,11 +34,12 @@ import java.util.Random;
  */
 public class PlayFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String SCORE = "score";
 
-    // TODO: Rename and change types of parameters
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String UNIT = "unit";
+
+
 
     private int score;
 
@@ -53,6 +56,9 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
     City city2;
     City cityQuestion;
 
+    String units;
+
+
 
     public PlayFragment() {
         // Required empty public constructor
@@ -65,7 +71,6 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
      * @param score score .
      * @return A new instance of fragment PlayFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static PlayFragment newInstance(int score) {
         PlayFragment fragment = new PlayFragment();
         Bundle args = new Bundle();
@@ -101,6 +106,8 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
         city2 = listOfCities.get(random2);
         cityQuestion = listOfCities.get(random3);
 
+        units = getUnits();
+
     }
 
     @Override
@@ -121,12 +128,11 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
 
         // get data from API
 
-        GeoDbApiService apiService = new GeoDbApiService(getContext(), bundle);
+        GeoDbApiService apiService = new GeoDbApiService(getContext(), bundle, units);
 
 
         apiService.getDistanceCities(cityQuestion.getId(), city1.getId(), "distanceCityA1");
         apiService.getDistanceCities(cityQuestion.getId(), city2.getId(), "distanceCityA2");
-
 
         // putting local data into bundle
         bundle.putString("cityQname", cityQuestion.getName());
@@ -166,6 +172,11 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
             bundle.putInt("selectedCity", 2);
             Navigation.findNavController(view).navigate(R.id.action_playFragment_to_resultFragment, bundle);
         }
+    }
+
+    private String getUnits() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(UNIT, "Imperial");
     }
 
     public ArrayList<City> createListOfCities() {

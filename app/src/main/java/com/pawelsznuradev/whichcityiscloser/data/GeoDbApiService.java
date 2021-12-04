@@ -48,12 +48,20 @@ public class GeoDbApiService {
     RequestQueue queue;
     Bundle bundle;
 
+    String distanceUnit;
 
-    public GeoDbApiService(Context context, Bundle bundle) {
+
+    public GeoDbApiService(Context context, Bundle bundle, String units) {
         //empty constructor
         this.context = context;
         this.bundle = bundle;
         queue = Volley.newRequestQueue(context);
+
+        if (units.equals("Metric")) {
+            distanceUnit = "KM";
+        } else {
+            distanceUnit = "MI";
+        }
     }
 
     public void getListOfCountriesWithCodes() {
@@ -137,11 +145,11 @@ public class GeoDbApiService {
         };
         queue.add(jsonObjectRequest);
     }
-//    "https://wft-geo-db.p.rapidapi.com/v1/geo/cities/45633/distance?distanceUnit=KM&toCityId=144809"
 
     public void getDistanceCities(int cityIdFrom, int cityIdTo, String bundleKey) {
-        String url = BASEURL + CITIES + "/" + cityIdFrom + "/" + DISTANCE + TOCITYID + cityIdTo;
-        // no idea why is this a one element final array but IDE said so
+
+        String url = BASEURL + CITIES + "/" + cityIdFrom + "/" + DISTANCE + DISTANCEUNIT + distanceUnit + "&" + TOCITYID + cityIdTo;
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
