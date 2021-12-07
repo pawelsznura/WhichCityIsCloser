@@ -28,8 +28,15 @@ public interface HighscoreDao {
     @Delete
     public void delete(List<Highscore> highscores);
 
+    @Query("DELETE FROM HIGHSCORE")
+    public void nukeWHOLETable();
+
     @Query("SELECT * FROM HIGHSCORE WHERE uid = :uid")
     public Highscore findByUid(int uid);
+
+    @Query("SELECT * FROM HIGHSCORE ORDER BY score DESC")
+    public List<Highscore> getAllHighscores();
+
 
 
 

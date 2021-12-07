@@ -19,6 +19,10 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDao;
+import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +42,7 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
 
     private EditText editTextUsername;
     private Button buttonSaveUsername;
+    private Button buttonDeleteHighScores;
 
 
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -145,6 +150,9 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
 
         editTextUsername.setText(getUsername());
 
+        buttonDeleteHighScores = (Button) view.findViewById(R.id.btnDeleteHighScoresOptions);
+        buttonDeleteHighScores.setOnClickListener(this);
+
 
         return view;
     }
@@ -197,6 +205,14 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
     public void onClick(View v) {
         if (v.getId() == R.id.btnUsernameSaveOptions) {
             saveUsername();
+        } else if (v.getId() == R.id.btnDeleteHighScoresOptions) {
+            HighscoreDatabase highscoreDatabase = HighscoreDatabase.getDatabase(getContext());
+
+            HighscoreDao highscoreDao = highscoreDatabase.highscoreDao();
+
+            highscoreDao.nukeWHOLETable();
+
+            Toast.makeText(getContext(), "High scores were deleted",Toast.LENGTH_SHORT).show();
         }
     }
 

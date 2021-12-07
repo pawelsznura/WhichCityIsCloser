@@ -42,7 +42,7 @@ public class Highscore {
     @NonNull
     @Override
     public String toString() {
-        return String.format("name: %s     score: %d", name, score);
+        return String.format("name: %s score: %d", name, score);
 
     }
 

@@ -2,11 +2,22 @@ package com.pawelsznuradev.whichcityiscloser;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.pawelsznuradev.whichcityiscloser.highscore.Highscore;
+import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDao;
+import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDatabase;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,5 +83,28 @@ public class HighScoreFragment extends Fragment {
 
 
         return inflater.inflate(R.layout.fragment_high_score, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        HighscoreDatabase highscoreDatabase = HighscoreDatabase.getDatabase(getContext());
+
+        HighscoreDao highscoreDao = highscoreDatabase.highscoreDao();
+
+        List<Highscore> highscores = highscoreDao.getAllHighscores();
+
+        Log.e("list ", highscores.toString());
+
+        HighScoreRecyclerViewAdapter adapter = new HighScoreRecyclerViewAdapter(getContext(), highscores);
+
+        RecyclerView rvHighscores = view.findViewById(R.id.rv_highscores);
+
+        rvHighscores.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvHighscores.setAdapter(adapter);
+
+
+
     }
 }
