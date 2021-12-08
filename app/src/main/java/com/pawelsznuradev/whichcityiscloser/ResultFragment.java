@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -57,8 +59,6 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
     public static final String USERNAME = "username";
 
 
-    // TODO: Rename and change types of parameters
-
     private int distanceCityA1;
     private int distanceCityA2;
     private int selectedCity;
@@ -67,7 +67,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
     private City cityA1;
     private City cityA2;
 
-    private boolean userWasCorrect;
+    private boolean userWasCorrect = false;
 
     Bundle bundle = new Bundle();
 
@@ -75,7 +75,6 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
 
 
     MapView mapView;
-    GoogleMap googleMap;
 
 
     public ResultFragment() {
@@ -89,7 +88,6 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
      * @param cityQ the city in the question.
      * @return A new instance of fragment ResultFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ResultFragment newInstance(int distanceCityA1, int distanceCityA2, int selectedCity, int score, City cityQ, City cityA1, City cityA2) {
         ResultFragment fragment = new ResultFragment();
         Bundle args = new Bundle();
@@ -149,7 +147,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
 
     private String getUnits() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        if (sharedPreferences.getString(UNIT, "Imperial") == "Metric") {
+        if (sharedPreferences.getString(UNIT, "Imperial").equals("Metric")) {
             return "KM";
         } else {
             return "MI";
@@ -191,6 +189,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
         // if user was wrong then change text of the button
 
         TextView cityQuestionTextView = view.findViewById(R.id.rightWrongResultText);
+
 
         if (distanceCityA1 < distanceCityA2) {
             // A1 is correct
@@ -235,6 +234,18 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (distanceCityA1 == distanceCityA2 || distanceCityA1 == 0 || distanceCityA2 == 0) {
+            saveHighscore();
+            Toast.makeText(getContext(), "Something went wrong, check your Internet connection", Toast.LENGTH_LONG).show();
+
+            Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_homeFragment);
+        }
+    }
+
     private void saveHighscore() {
         // get database for storing the highscore
         HighscoreDatabase highscoreDatabase = HighscoreDatabase.getDatabase(getContext());
@@ -254,8 +265,6 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
             }
         });
 
-
-//        Log.e("Highscore", highscore.toString());
 
     }
 

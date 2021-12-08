@@ -97,48 +97,48 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
         CitiesDatabase citiesDatabase = CitiesDatabase.getDatabase(getContext());
         CitiesDAO citiesDAO = citiesDatabase.citiesDAO();
 
-        Executor executor = Executors.newSingleThreadExecutor();
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                final int sizeCities = citiesDAO.getCount();
-                final int random1 = rand.nextInt(sizeCities);
-                int random2 = rand.nextInt(sizeCities);
-                int random3 = rand.nextInt(sizeCities);
-
-                while (random1 == random2) {
-//            make sure the numbers are not the same
-                    random2 = rand.nextInt(sizeCities);
-                }
-                while (random1 == random3 || random2 == random3) {
-//            make sure the numbers are not the same
-                    random3 = rand.nextInt(sizeCities);
-                }
-
-                cityQuestion = citiesDAO.findByUId(random3);
-                city1 = citiesDAO.findByUId(random1);
-                city2 = citiesDAO.findByUId(random2);
-            }
-        });
-
-
-//        int random1 = rand.nextInt(listOfCities.size());
-//        int random2 = rand.nextInt(listOfCities.size());
-//        int random3 = rand.nextInt(listOfCities.size());
+//        Executor executor = Executors.newSingleThreadExecutor();
+//        executor.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                final int sizeCities = citiesDAO.getCount();
+//                final int random1 = rand.nextInt(sizeCities);
+//                int random2 = rand.nextInt(sizeCities);
+//                int random3 = rand.nextInt(sizeCities);
 //
-//        while (random1 == random2) {
+//                while (random1 == random2) {
 ////            make sure the numbers are not the same
-//            random2 = rand.nextInt(listOfCities.size());
-//        }
-//        while (random1 == random3 || random2 == random3) {
+//                    random2 = rand.nextInt(sizeCities);
+//                }
+//                while (random1 == random3 || random2 == random3) {
 ////            make sure the numbers are not the same
-//            random3 = rand.nextInt(listOfCities.size());
-//        }
+//                    random3 = rand.nextInt(sizeCities);
+//                }
+//
+//                cityQuestion = citiesDAO.findByUId(random3);
+//                city1 = citiesDAO.findByUId(random1);
+//                city2 = citiesDAO.findByUId(random2);
+//            }
+//        });
 
 
-//        city1 = listOfCities.get(random1);
-//        city2 = listOfCities.get(random2);
-//        cityQuestion = listOfCities.get(random3);
+        int random1 = rand.nextInt(listOfCities.size());
+        int random2 = rand.nextInt(listOfCities.size());
+        int random3 = rand.nextInt(listOfCities.size());
+
+        while (random1 == random2) {
+//            make sure the numbers are not the same
+            random2 = rand.nextInt(listOfCities.size());
+        }
+        while (random1 == random3 || random2 == random3) {
+//            make sure the numbers are not the same
+            random3 = rand.nextInt(listOfCities.size());
+        }
+
+
+        city1 = listOfCities.get(random1);
+        city2 = listOfCities.get(random2);
+        cityQuestion = listOfCities.get(random3);
 
         units = getUnits();
 
@@ -171,42 +171,24 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
         scoreTextView.setText(String.format("Your score: %s", score));
 
 
-        Executor executor = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executor.execute(new Runnable() {
+        // get data from API
+        GeoDbApiService apiService = new GeoDbApiService(getContext(), bundle, units);
+        apiService.getDistanceCities(cityQuestion.getId(), city1.getId(), "distanceCityA1");
+        apiService.getDistanceCities(cityQuestion.getId(), city2.getId(), "distanceCityA2");
 
-            @Override
-            public void run() {
+        // putting local data into bundle
+        bundle.putString("cityQname", cityQuestion.getName());
+        bundle.putString("cityA1name", city1.getName());
+        bundle.putString("cityA2name", city2.getName());
 
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        // get data from API
-                        GeoDbApiService apiService = new GeoDbApiService(getContext(), bundle, units);
-                        apiService.getDistanceCities(cityQuestion.getId(), city1.getId(), "distanceCityA1");
-                        apiService.getDistanceCities(cityQuestion.getId(), city2.getId(), "distanceCityA2");
-
-                        // putting local data into bundle
-                        bundle.putString("cityQname", cityQuestion.getName());
-                        bundle.putString("cityA1name", city1.getName());
-                        bundle.putString("cityA2name", city2.getName());
-
-                        bundle.putParcelable("CityQ", cityQuestion);
-                        bundle.putParcelable("CityA1", city1);
-                        bundle.putParcelable("CityA2", city2);
+        bundle.putParcelable("CityQ", cityQuestion);
+        bundle.putParcelable("CityA1", city1);
+        bundle.putParcelable("CityA2", city2);
 
 
-                        btnCity1.setText(city1.getName());
-                        btnCity2.setText(city2.getName());
-                        playText.setText(String.format("Which city is closer to %s?", cityQuestion.getName()));
-
-
-                    }
-                });
-
-            }
-        });
+        btnCity1.setText(city1.getName());
+        btnCity2.setText(city2.getName());
+        playText.setText(String.format("Which city is closer to %s?", cityQuestion.getName()));
 
 
         return view;
@@ -215,6 +197,8 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
 
     @Override
     public void onClick(View view) {
+
+//        if ()
 
         if (view.getId() == R.id.btnCity1Play) {
             bundle.putInt("selectedCity", 1);
