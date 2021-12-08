@@ -33,7 +33,9 @@ public class City implements Parcelable {
      */
 
     @NonNull
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
+
     private int id;
     private String wikiDataId;
     private String type;
@@ -232,5 +234,13 @@ public class City implements Parcelable {
         parcel.writeDouble(longitude);
         parcel.writeInt(population);
 
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 }

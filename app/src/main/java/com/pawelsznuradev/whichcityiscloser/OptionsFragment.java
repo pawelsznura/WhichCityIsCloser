@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,9 @@ import android.widget.Toast;
 
 import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDao;
 import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDatabase;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -210,9 +215,16 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
 
             HighscoreDao highscoreDao = highscoreDatabase.highscoreDao();
 
-            highscoreDao.nukeWHOLETable();
+            Executor executor = Executors.newSingleThreadExecutor();
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
 
-            Toast.makeText(getContext(), "High scores were deleted",Toast.LENGTH_SHORT).show();
+                    highscoreDao.nukeWHOLETable();
+                }
+            });
+
+            Toast.makeText(getContext(), "High scores were deleted", Toast.LENGTH_SHORT).show();
         }
     }
 

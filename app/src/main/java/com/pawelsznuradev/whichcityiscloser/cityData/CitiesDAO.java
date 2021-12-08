@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.pawelsznuradev.whichcityiscloser.highscore.Highscore;
+
 import java.util.List;
 
 /**
@@ -27,8 +29,14 @@ public interface CitiesDAO {
     @Delete
     public void delete(List<City> cities);
 
-    @Query("SELECT * FROM City WHERE id = :id")
-    public City findById(int id);
+    @Query("SELECT * FROM City WHERE uid = :uid")
+    public City findByUId(int uid);
+
+    @Query("SELECT * FROM City ")
+    public List<City> getAllCities();
+
+    @Query("SELECT COUNT(*) FROM City")
+    public int getCount();
 
 
 }

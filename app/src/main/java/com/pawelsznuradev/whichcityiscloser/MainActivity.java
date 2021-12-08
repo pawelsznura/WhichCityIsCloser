@@ -12,8 +12,18 @@ import androidx.navigation.ui.NavigationUI;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.google.android.material.navigation.NavigationView;
+import com.pawelsznuradev.whichcityiscloser.cityData.CitiesDAO;
+import com.pawelsznuradev.whichcityiscloser.cityData.CitiesDatabase;
+import com.pawelsznuradev.whichcityiscloser.cityData.City;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
     private boolean getDarkModeStatus() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);

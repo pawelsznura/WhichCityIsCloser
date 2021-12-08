@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
  * Created by Pawel Sznura on 30/11/2021.
  */
 
-@Database(entities = {City.class}, version = 1)
+@Database(entities = {City.class}, version = 2)
 public abstract class CitiesDatabase extends RoomDatabase {
 
     public abstract CitiesDAO citiesDAO();
@@ -21,12 +21,12 @@ public abstract class CitiesDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (CitiesDatabase.class) {
                 if (INSTANCE == null) {
-                    Room.databaseBuilder(
+                    INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             CitiesDatabase.class,
                             "cities_database")
                             .fallbackToDestructiveMigration()
-                            .allowMainThreadQueries()
+//                            .allowMainThreadQueries()
                             .build();
 
                 }

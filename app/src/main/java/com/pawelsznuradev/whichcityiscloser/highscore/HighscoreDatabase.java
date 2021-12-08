@@ -24,10 +24,10 @@ public abstract class HighscoreDatabase extends RoomDatabase {
     // singleton instance for the TaskDatabase
     private static HighscoreDatabase INSTANCE;
 
-    public static HighscoreDatabase getDatabase(final Context context){
-        if(INSTANCE == null){
-            synchronized (HighscoreDatabase.class){
-                if (INSTANCE == null){
+    public static HighscoreDatabase getDatabase(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (HighscoreDatabase.class) {
+                if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             HighscoreDatabase.class, "highscore_database")
                             .fallbackToDestructiveMigration()
