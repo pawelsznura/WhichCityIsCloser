@@ -1,5 +1,7 @@
 package com.pawelsznuradev.whichcityiscloser;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -210,6 +214,7 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
     public void onClick(View v) {
         if (v.getId() == R.id.btnUsernameSaveOptions) {
             saveUsername();
+            hideKeyboard();
         } else if (v.getId() == R.id.btnDeleteHighScoresOptions) {
             HighscoreDatabase highscoreDatabase = HighscoreDatabase.getDatabase(getContext());
 
@@ -224,9 +229,16 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
                 }
             });
 
-            Toast.makeText(getContext(), "High scores were deleted", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "High scores were deleted!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void hideKeyboard() {
+        // based on https://stackoverflow.com/a/9981958/10457515
+        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+    }
+
 
     private void saveUsername() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
@@ -234,6 +246,9 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
 
         editor.putString(USERNAME, editTextUsername.getText().toString());
         editor.apply();
+
+        Toast.makeText(getContext(), "Username saved", Toast.LENGTH_SHORT).show();
+
     }
 
     private String getUsername() {
