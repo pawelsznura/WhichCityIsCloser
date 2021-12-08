@@ -9,18 +9,18 @@
 
     tools:context=".PlayFragment">
 
-    <!--  this image is a placeholder for a interactive map  -->
-    <ImageView
-        android:id="@+id/imageView2"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/placeholder_image"
+        android:layout_height="0dp"
 
         android:src="@drawable/map_play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.5"
-        tools:ignore="ImageContrastCheck"
-        tools:layout_editor_absoluteY="4dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
 
     <Button
         android:id="@+id/btnCity1Play"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@+id/scoreResultText"
         app:layout_constraintEnd_toStartOf="@+id/btnCity2Play"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/mapView"
         app:layout_constraintTop_toBottomOf="@+id/whichCityIsCloserPlayText" />
 
     <Button
@@ -54,7 +54,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnCity1Play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/mapView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -67,6 +67,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/mapView"
         app:layout_constraintTop_toBottomOf="@+id/btnCity1Play" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,4 +53,12 @@
     <string name="answerCorrect">Correct!</string>
     <string name="answerWrong">Wrong!</string>
     <string name="error">Error</string>
+    <string name="share">share</string>
+    <string name="tryAgainText">Try again</string>
+    <string name="correctText">Correct!</string>
+    <string name="wrongText">Wrong!</string>
+    <string name="errorText">Error</string>
+    <string name="distanceResultText">%s is %d %s away from %s</string>
+    <string name="shareText">My score is %d. Can you beat it? https://play.google.com/store/apps/developer?id=Pawel+Sznura</string>
+
 </resources>

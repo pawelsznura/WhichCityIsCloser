@@ -1,6 +1,7 @@
 package com.pawelsznuradev.whichcityiscloser;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -8,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pawelsznuradev.whichcityiscloser.cityData.City;
@@ -165,6 +166,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
                              Bundle savedInstanceState) {
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleResultFragment));
 
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_result, container, false);
 
@@ -176,8 +178,13 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
 
         Button btnNext = view.findViewById(R.id.btnNextResult);
         btnNext.setOnClickListener(this);
+
+        Button btnShare = view.findViewById(R.id.btnShare);
+
         if (!userWasCorrect) {
-            btnNext.setText("Try again");
+            btnNext.setText(R.string.tryAgainText);
+            btnShare.setVisibility(View.VISIBLE);
+            btnShare.setOnClickListener(this);
         }
         // if user was wrong then change text of the button
 
@@ -187,14 +194,14 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
             // A1 is correct
             if (selectedCity == 1) {
                 // user was correct
-                cityQuestionTextView.setText("Correct!");
+                cityQuestionTextView.setText(R.string.correctText);
             } else if (selectedCity == 2) {
                 // user was wrong
-                cityQuestionTextView.setText("Wrong!");
+                cityQuestionTextView.setText(R.string.wrongText);
                 saveHighscore();
             } else {
                 // selection error
-                cityQuestionTextView.setText("Error");
+                cityQuestionTextView.setText(R.string.errorText);
             }
         } else {
             // A2 is correct
@@ -212,10 +219,10 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
 
 
         TextView city1resultTextView = view.findViewById(R.id.city1ResultText);
-        city1resultTextView.setText(String.format("%s is %d %s away from %s", cityA1.getName(), distanceCityA1, units, cityQ.getName()));
+        city1resultTextView.setText(String.format(getString(R.string.distanceResultText), cityA1.getName(), distanceCityA1, units, cityQ.getName()));
 
         TextView city2resultTextView = view.findViewById(R.id.city2ResultText);
-        city2resultTextView.setText(String.format("%s is %d %s away from %s", cityA2.getName(), distanceCityA2, units, cityQ.getName()));
+        city2resultTextView.setText(String.format(getString(R.string.distanceResultText), cityA2.getName(), distanceCityA2, units, cityQ.getName()));
 
         TextView scoreTextView = view.findViewById(R.id.scoreResultText);
         scoreTextView.setText(String.format("Your score: %s", score));
@@ -262,16 +269,27 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
                 // if user was wrong then navigate to home fragment
                 Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_homeFragment, bundle);
             }
+        } else if (view.getId() == R.id.btnShare) {
+            onShare();
         }
+    }
+
+    private void onShare() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, String.format(getString(R.string.shareText), score));
+        sendIntent.setType("text/plain");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        googleMap = googleMap;
-
 
         googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(cityQ.getLatitude(), cityQ.getLongitude()))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                 .title(cityQ.getName()));
 
         googleMap.addMarker(new MarkerOptions()

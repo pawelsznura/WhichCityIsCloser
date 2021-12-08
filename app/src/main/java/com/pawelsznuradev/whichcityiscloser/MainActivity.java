@@ -14,6 +14,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pawelsznuradev.whichcityiscloser.cityData.CitiesDAO;
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
     // NOT_A_PROGRAMMER, 2015. Change ActionBar title using Fragments. [online]. Stack Overflow. Available from: https://stackoverflow.com/a/28453012/ [Accessed 21 October 2021].
     public void setAppBarTitle(String title) {
         getSupportActionBar().setTitle(title);
+
     }
 
 

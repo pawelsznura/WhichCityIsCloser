@@ -79,4 +79,16 @@
         app:layout_constraintStart_toEndOf="@+id/scoreResultText"
         app:layout_constraintTop_toTopOf="@+id/scoreResultText" />
 
+    <Button
+        android:id="@+id/btnShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/share"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/scoreResultText"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/scoreResultText"
+        app:layout_constraintTop_toTopOf="@+id/scoreResultText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,58 +9,41 @@
     tools:context=".ResultFragment">
 
 
-    <!--  this image is a placeholder for a interactive map  -->
-    <ImageView
-        android:id="@+id/imageView3"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="0dp"
-        android:layout_height="363dp"
-        android:contentDescription="@string/placeholder_image"
-        android:src="@drawable/map_result"
+        android:layout_height="0dp"
+
+        android:src="@drawable/map_play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5"
-        tools:ignore="ImageContrastCheck" />
+        app:layout_constraintWidth_percent="0.5" />
 
 
     <TextView
         android:id="@+id/rightWrongResultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/right"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/city1ResultText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/mapView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/scoreResultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginBig"
+        android:layout_marginTop="32dp"
         android:text="@string/score"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnNextResult"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnNextResult"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/mapView"
         app:layout_constraintTop_toBottomOf="@+id/city1ResultText" />
-
-    <TextView
-        android:id="@+id/city1ResultText"
-        android:layout_width="151dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="@dimen/marginBig"
-        android:text="@string/city1result"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/scoreResultText"
-        app:layout_constraintEnd_toStartOf="@+id/city2ResultText"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/rightWrongResultText" />
 
     <TextView
         android:id="@+id/city2ResultText"
@@ -69,22 +52,43 @@
         android:text="@string/city2result"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/scoreResultText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/city1ResultText"
+        app:layout_constraintTop_toTopOf="@+id/city1ResultText" />
+
+    <TextView
+        android:id="@+id/city1ResultText"
+        android:layout_width="151dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/city1result"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/city2ResultText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/mapView"
         app:layout_constraintTop_toBottomOf="@+id/rightWrongResultText" />
 
     <Button
         android:id="@+id/btnNextResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginMedium"
         android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/scoreResultText"
+        app:layout_constraintTop_toTopOf="@+id/scoreResultText" />
+
+    <Button
+        android:id="@+id/btnShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/share"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/scoreResultText"
+        app:layout_constraintStart_toStartOf="@+id/scoreResultText"
         app:layout_constraintTop_toBottomOf="@+id/scoreResultText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

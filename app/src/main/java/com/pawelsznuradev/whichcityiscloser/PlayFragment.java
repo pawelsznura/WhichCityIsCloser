@@ -20,6 +20,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pawelsznuradev.whichcityiscloser.cityData.CitiesDAO;
@@ -170,17 +171,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
         scoreTextView.setText(String.format("Your score: %s", score));
 
 
-
-
         Executor executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());
         executor.execute(new Runnable() {
 
             @Override
             public void run() {
-
-
-
 
                 handler.post(new Runnable() {
                     @Override
@@ -274,6 +270,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
                 String cityName = cityQuestion.getName();
                 map.addMarker(new MarkerOptions()
                         .position(cityCords)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                         .title(cityName));
 
                 map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(cityQuestion.getLatitude(), cityQuestion.getLongitude())));
