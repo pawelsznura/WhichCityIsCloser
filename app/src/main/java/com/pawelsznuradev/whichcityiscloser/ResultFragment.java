@@ -289,7 +289,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
                 .geodesic(true));
 
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positionCityQ, 3));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positionCityQ, 2));
 
     }
 
