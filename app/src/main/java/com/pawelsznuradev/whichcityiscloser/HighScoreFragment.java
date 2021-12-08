@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +19,10 @@ import com.pawelsznuradev.whichcityiscloser.highscore.Highscore;
 import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDao;
 import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +39,9 @@ public class HighScoreFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    List<Highscore> highscores = new ArrayList<>();
+
 
     public HighScoreFragment() {
         // Required empty public constructor
@@ -93,17 +101,43 @@ public class HighScoreFragment extends Fragment {
 
         HighscoreDao highscoreDao = highscoreDatabase.highscoreDao();
 
-        List<Highscore> highscores = highscoreDao.getAllHighscores();
+//        highscores = highscoreDao.getAllHighscores();
 
-        Log.e("list ", highscores.toString());
+        Executor executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                // getting the data on the background thread
+                highscores = highscoreDao.getAllHighscores();
 
-        HighScoreRecyclerViewAdapter adapter = new HighScoreRecyclerViewAdapter(getContext(), highscores);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
 
-        RecyclerView rvHighscores = view.findViewById(R.id.rv_highscores);
+                        // passing the high score data to the recycler viewer on the UI thread
+                        HighScoreRecyclerViewAdapter adapter = new HighScoreRecyclerViewAdapter(getContext(), highscores);
 
-        rvHighscores.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvHighscores.setAdapter(adapter);
+                        RecyclerView rvHighscores = view.findViewById(R.id.rv_highscores);
 
+                        rvHighscores.setLayoutManager(new LinearLayoutManager(getContext()));
+                        rvHighscores.setAdapter(adapter);
+                    }
+                });
+            }
+        });
+
+
+//        new Handler(Looper.getMainLooper()).post(new Runnable() {
+//            @Override
+//            public void run() {
+//                        highscores = highscoreDao.getAllHighscores();
+//
+//            }
+//        });
+
+
+//        Log.e("list ", highscores.toString());
 
 
     }

@@ -31,7 +31,7 @@ public abstract class HighscoreDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             HighscoreDatabase.class, "highscore_database")
                             .fallbackToDestructiveMigration()
-                            .allowMainThreadQueries()
+//                            .allowMainThreadQueries()
                             .build();
                 }
             }

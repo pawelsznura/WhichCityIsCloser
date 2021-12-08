@@ -26,6 +26,9 @@ import com.pawelsznuradev.whichcityiscloser.highscore.Highscore;
 import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDao;
 import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDatabase;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ResultFragment#newInstance} factory method to
@@ -233,9 +236,15 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
 
         Highscore highscore = new Highscore(name, score);
 
+        Executor executor = Executors.newSingleThreadExecutor();
 
-        
-        highscoreDao.insert(highscore);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                highscoreDao.insert(highscore);
+            }
+        });
+
 
 //        Log.e("Highscore", highscore.toString());
 

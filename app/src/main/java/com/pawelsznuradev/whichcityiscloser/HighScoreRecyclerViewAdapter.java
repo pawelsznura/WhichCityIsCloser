@@ -33,9 +33,7 @@ public class HighScoreRecyclerViewAdapter extends RecyclerView.Adapter<HighScore
     public HighScoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(this.context).inflate(R.layout.high_score_list_item, parent, false);
 
-        HighScoreViewHolder viewHolder = new HighScoreViewHolder(view);
-
-        return viewHolder;
+        return new HighScoreViewHolder(view);
     }
 
     @Override
@@ -51,6 +49,9 @@ public class HighScoreRecyclerViewAdapter extends RecyclerView.Adapter<HighScore
 
         TextView tvScore = itemView.findViewById(R.id.tvScore);
         tvScore.setText(String.valueOf(highscore.getScore()));
+
+        TextView tvPosition = itemView.findViewById(R.id.tvPosition);
+        tvPosition.setText(String.format("%s.", String.valueOf(position + 1)));
 
     }
 
