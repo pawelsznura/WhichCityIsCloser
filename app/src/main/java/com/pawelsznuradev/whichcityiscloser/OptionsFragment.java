@@ -2,7 +2,9 @@ package com.pawelsznuradev.whichcityiscloser;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -40,14 +42,6 @@ import java.util.concurrent.Executors;
  */
 public class OptionsFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private EditText editTextUsername;
     private Button buttonSaveUsername;
@@ -64,20 +58,9 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment OptionsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static OptionsFragment newInstance(String param1, String param2) {
+    public static OptionsFragment newInstance() {
         OptionsFragment fragment = new OptionsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -85,10 +68,6 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
     }
 
@@ -216,21 +195,48 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
             saveUsername();
             hideKeyboard();
         } else if (v.getId() == R.id.btnDeleteHighScoresOptions) {
-            HighscoreDatabase highscoreDatabase = HighscoreDatabase.getDatabase(getContext());
-
-            HighscoreDao highscoreDao = highscoreDatabase.highscoreDao();
-
-            Executor executor = Executors.newSingleThreadExecutor();
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-
-                    highscoreDao.nukeWHOLETable();
-                }
-            });
-
-            Toast.makeText(getContext(), "High scores were deleted!", Toast.LENGTH_SHORT).show();
+            askToConfirmDeleteHS();
         }
+    }
+
+    private void askToConfirmDeleteHS() {
+        // based on    https://stackoverflow.com/a/36747528/10457515
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(true);
+        builder.setTitle("There is no return!");
+        builder.setMessage("Are you sure you want to delete the high scores? ");
+        builder.setPositiveButton("Confirm",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteHighScores();
+                    }
+                });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void deleteHighScores() {
+        HighscoreDatabase highscoreDatabase = HighscoreDatabase.getDatabase(getContext());
+
+        HighscoreDao highscoreDao = highscoreDatabase.highscoreDao();
+
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                highscoreDao.nukeWHOLETable();
+            }
+        });
+
+        Toast.makeText(getContext(), "High scores were deleted!", Toast.LENGTH_SHORT).show();
     }
 
     private void hideKeyboard() {
