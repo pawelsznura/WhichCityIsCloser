@@ -29,7 +29,6 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private AppBarConfiguration appBarConfiguration;
 
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -65,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private boolean getDarkModeStatus() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean(DARKMODE, false);
@@ -85,6 +83,5 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(title);
 
     }
-
 
 }

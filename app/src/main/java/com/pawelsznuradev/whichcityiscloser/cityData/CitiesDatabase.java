@@ -28,7 +28,6 @@ public abstract class CitiesDatabase extends RoomDatabase {
                             .fallbackToDestructiveMigration()
 //                            .allowMainThreadQueries()
                             .build();
-
                 }
             }
         }

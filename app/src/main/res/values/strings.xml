@@ -60,5 +60,10 @@
     <string name="errorText">Error</string>
     <string name="distanceResultText">%s is %d %s away from %s</string>
     <string name="shareText">My score is %d. Can you beat it? https://play.google.com/store/apps/developer?id=Pawel+Sznura</string>
+    <string name="askToConfirmDeleteHsTitle">There is no return!</string>
+    <string name="askToConfirmDeleteHsMessage">\"Are you sure you want to delete the high scores? \"</string>
+    <string name="confirm">Confirm</string>
+    <string name="highscoresDeletedMessage">High scores were deleted!</string>
+    <string name="usernameSaved">Username saved</string>
 
 </resources>

@@ -52,7 +52,6 @@ public class GeoDbApiService {
 
 
     public GeoDbApiService(Context context, Bundle bundle, String units) {
-        //empty constructor
         this.context = context;
         this.bundle = bundle;
         queue = Volley.newRequestQueue(context);
@@ -64,26 +63,15 @@ public class GeoDbApiService {
         }
     }
 
-    public void getListOfCountriesWithCodes() {
-        String[] countryCodes = Locale.getISOCountries();
-        String[] countrynames = new String[countryCodes.length];
-//        Log.e("country codes", Arrays.toString(countryCodes));
-        for (int i = 0; i < countryCodes.length; i++) {
-            countrynames[i] = new Locale("", countryCodes[i]).getDisplayName();
-        }
-//        Log.e("country name", Arrays.toString(countrynames));
-    }
 
     public void getCityDetailsByID(String id) {
 //        'https://wft-geo-db.p.rapidapi.com/v1/geo/cities/Q60'
         String url = BASEURL + CITIES + "/" + id;
-//        Log.e("url", url);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-//                        Log.e("response", response.toString());
                         try {
                             City city = new City(response.getJSONObject("data"));
                             Log.e(city.getName() + "lat", String.valueOf(city.getLatitude()));
@@ -111,13 +99,11 @@ public class GeoDbApiService {
     public void getCitiesListDetailsByName(String name) {
 //        https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=London&sort=-population
         String url = BASEURL + CITIES + "?" + NAMEPREFIX + name + "&" + SORT + POPULATIONDESC;
-//        Log.e("url", url);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-//                        Log.e("response", response.toString());
                         try {
                             JSONArray dataArray = response.getJSONArray("data");
                             for (int i = 0; i < dataArray.length(); i++) {

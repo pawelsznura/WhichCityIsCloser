@@ -2,6 +2,9 @@ package com.pawelsznuradev.whichcityiscloser;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
+import static com.pawelsznuradev.whichcityiscloser.R.string.highscoresDeletedMessage;
+import static com.pawelsznuradev.whichcityiscloser.R.string.usernameSaved;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,18 +38,9 @@ import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDatabase;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OptionsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OptionsFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-
     private EditText editTextUsername;
-    private Button buttonSaveUsername;
-    private Button buttonDeleteHighScores;
-
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String USERNAME = "username";
@@ -101,6 +95,7 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+        // check what the user selected previously
         int selectedUnit;
         if (getUnits().equals("Imperial")) {
             selectedUnit = 1;
@@ -109,7 +104,6 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
         }
 
         spinner.setSelection(selectedUnit);
-
 
         // Switch for dark mode
         // based on
@@ -131,16 +125,15 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
 
         darkModeSwitch.setChecked(getDarkmode());
 
-        editTextUsername = (EditText) view.findViewById(R.id.editTextUsernameOptions);
-        buttonSaveUsername = (Button) view.findViewById(R.id.btnUsernameSaveOptions);
-
+        Button buttonSaveUsername = (Button) view.findViewById(R.id.btnUsernameSaveOptions);
         buttonSaveUsername.setOnClickListener(this);
 
+        editTextUsername = (EditText) view.findViewById(R.id.editTextUsernameOptions);
+        // set inside the textview the previous username
         editTextUsername.setText(getUsername());
 
-        buttonDeleteHighScores = (Button) view.findViewById(R.id.btnDeleteHighScoresOptions);
+        Button buttonDeleteHighScores = (Button) view.findViewById(R.id.btnDeleteHighScoresOptions);
         buttonDeleteHighScores.setOnClickListener(this);
-
 
         return view;
     }
@@ -150,10 +143,8 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
         // Spinner Units metric = 0, imperial = 1
         if (i == 0) {
             saveUnits("Metric");
-            Log.i("Unit selected", "Metric");
         } else if (i == 1) {
             saveUnits("Imperial");
-            Log.i("Unit selected", "Imperial");
         }
     }
 
@@ -186,7 +177,6 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 
     @Override
@@ -203,9 +193,9 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
         // based on    https://stackoverflow.com/a/36747528/10457515
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setCancelable(true);
-        builder.setTitle("There is no return!");
-        builder.setMessage("Are you sure you want to delete the high scores? ");
-        builder.setPositiveButton("Confirm",
+        builder.setTitle(R.string.askToConfirmDeleteHsTitle);
+        builder.setMessage(R.string.askToConfirmDeleteHsMessage);
+        builder.setPositiveButton(R.string.confirm,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -224,7 +214,6 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
 
     private void deleteHighScores() {
         HighscoreDatabase highscoreDatabase = HighscoreDatabase.getDatabase(getContext());
-
         HighscoreDao highscoreDao = highscoreDatabase.highscoreDao();
 
         Executor executor = Executors.newSingleThreadExecutor();
@@ -236,7 +225,7 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
             }
         });
 
-        Toast.makeText(getContext(), "High scores were deleted!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), highscoresDeletedMessage, Toast.LENGTH_SHORT).show();
     }
 
     private void hideKeyboard() {
@@ -253,7 +242,7 @@ public class OptionsFragment extends Fragment implements AdapterView.OnItemSelec
         editor.putString(USERNAME, editTextUsername.getText().toString());
         editor.apply();
 
-        Toast.makeText(getContext(), "Username saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), usernameSaved, Toast.LENGTH_SHORT).show();
 
     }
 

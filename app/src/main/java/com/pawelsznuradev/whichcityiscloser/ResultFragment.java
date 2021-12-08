@@ -34,16 +34,7 @@ import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDatabase;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ResultFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ResultFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
 
     private static final String DISTANCECITYA1 = "distanceCityA1";
     private static final String DISTANCECITYA2 = "distanceCityA2";
@@ -53,11 +44,9 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
     private static final String CITYA1 = "CityA1";
     private static final String CITYA2 = "CityA2";
 
-
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String UNIT = "unit";
     public static final String USERNAME = "username";
-
 
     private int distanceCityA1;
     private int distanceCityA2;
@@ -68,11 +57,8 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
     private City cityA2;
 
     private boolean userWasCorrect = false;
-
     Bundle bundle = new Bundle();
-
     String units;
-
 
     MapView mapView;
 
@@ -81,13 +67,6 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param cityQ the city in the question.
-     * @return A new instance of fragment ResultFragment.
-     */
     public static ResultFragment newInstance(int distanceCityA1, int distanceCityA2, int selectedCity, int score, City cityQ, City cityA1, City cityA2) {
         ResultFragment fragment = new ResultFragment();
         Bundle args = new Bundle();
@@ -100,7 +79,6 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
         args.putParcelable(CITYA1, cityA1);
         args.putParcelable(CITYA2, cityA2);
 
-
         fragment.setArguments(args);
         return fragment;
     }
@@ -110,7 +88,6 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
             distanceCityA1 = getArguments().getInt(DISTANCECITYA1);
             distanceCityA2 = getArguments().getInt(DISTANCECITYA2);
             selectedCity = getArguments().getInt(SELECTEDCITY);
@@ -140,7 +117,6 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
                     userWasCorrect = false;
                 }
             }
-
             units = getUnits();
         }
     }
@@ -152,8 +128,6 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
         } else {
             return "MI";
         }
-
-
     }
 
     private String getUsername() {
@@ -166,13 +140,11 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
                              Bundle savedInstanceState) {
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleResultFragment));
 
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_result, container, false);
 
         mapView = (MapView) view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-
         mapView.getMapAsync(this);
 
 
@@ -189,7 +161,6 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
         // if user was wrong then change text of the button
 
         TextView cityQuestionTextView = view.findViewById(R.id.rightWrongResultText);
-
 
         if (distanceCityA1 < distanceCityA2) {
             // A1 is correct
@@ -264,18 +235,15 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
                 highscoreDao.insert(highscore);
             }
         });
-
-
     }
 
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnNextResult) {
-            // if user was right then navigate to play fragment
             if (userWasCorrect) {
+                // if user was right then navigate to play fragment
                 Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_playFragment, bundle);
-
             } else {
                 // if user was wrong then navigate to home fragment
                 Navigation.findNavController(view).navigate(R.id.action_resultFragment_to_homeFragment, bundle);

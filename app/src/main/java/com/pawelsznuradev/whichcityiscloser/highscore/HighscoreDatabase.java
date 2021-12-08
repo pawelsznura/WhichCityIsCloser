@@ -17,7 +17,6 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 @Database(entities = {Highscore.class}, version = 1)
 public abstract class HighscoreDatabase extends RoomDatabase {
 
-
     // method for getting TaskDao which will be implemented for us
     public abstract HighscoreDao highscoreDao();
 

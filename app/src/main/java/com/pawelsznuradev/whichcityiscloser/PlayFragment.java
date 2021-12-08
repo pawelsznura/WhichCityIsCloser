@@ -33,26 +33,17 @@ import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PlayFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PlayFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
 
     private static final String SCORE = "score";
-
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String UNIT = "unit";
 
-
     private int score;
-
 
     Bundle bundle = new Bundle();
 
-    // getting a sample list of cities
+    // getting a list of cities
     ArrayList<City> listOfCities = createListOfCities();
 
     MapView mapView;
@@ -64,18 +55,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
 
     String units;
 
-
     public PlayFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param score score .
-     * @return A new instance of fragment PlayFragment.
-     */
     public static PlayFragment newInstance(int score) {
         PlayFragment fragment = new PlayFragment();
         Bundle args = new Bundle();
@@ -92,10 +75,9 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
             bundle.putInt(SCORE, score);
         }
 
-        Random rand = new Random();
         // get cities from database
-        CitiesDatabase citiesDatabase = CitiesDatabase.getDatabase(getContext());
-        CitiesDAO citiesDAO = citiesDatabase.citiesDAO();
+//        CitiesDatabase citiesDatabase = CitiesDatabase.getDatabase(getContext());
+//        CitiesDAO citiesDAO = citiesDatabase.citiesDAO();
 
 //        Executor executor = Executors.newSingleThreadExecutor();
 //        executor.execute(new Runnable() {
@@ -121,20 +103,20 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
 //            }
 //        });
 
-
+        // getting random numbers to select cities from the list
+        Random rand = new Random();
         int random1 = rand.nextInt(listOfCities.size());
         int random2 = rand.nextInt(listOfCities.size());
         int random3 = rand.nextInt(listOfCities.size());
 
         while (random1 == random2) {
-//            make sure the numbers are not the same
+            // make sure the numbers are not the same
             random2 = rand.nextInt(listOfCities.size());
         }
         while (random1 == random3 || random2 == random3) {
-//            make sure the numbers are not the same
+            // make sure the numbers are not the same
             random3 = rand.nextInt(listOfCities.size());
         }
-
 
         city1 = listOfCities.get(random1);
         city2 = listOfCities.get(random2);
@@ -152,8 +134,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
 
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titlePlayFragment));
 
-
-//        https://stackoverflow.com/a/19806967/10457515
+        // https://stackoverflow.com/a/19806967/10457515
         mapView = (MapView) view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
@@ -197,9 +178,6 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
 
     @Override
     public void onClick(View view) {
-
-//        if ()
-
         if (view.getId() == R.id.btnCity1Play) {
             bundle.putInt("selectedCity", 1);
             Navigation.findNavController(view).navigate(R.id.action_playFragment_to_resultFragment, bundle);
@@ -215,7 +193,6 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
     }
 
     public ArrayList<City> createListOfCities() {
-//        this function creates a small list of cities for easier testing
         ArrayList<City> arrayList = new ArrayList<>();
         arrayList.add(new City(45633, "Q84", "London", -0.1275, 51.507222222));
         arrayList.add(new City(144809, "Q2379199", "Edinburgh", -3.19333, 55.94973));
@@ -260,17 +237,14 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
                 map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(cityQuestion.getLatitude(), cityQuestion.getLongitude())));
             }
         });
-
-
     }
 
     @Override
     public void onResume() {
         // changing the title in case of lifecycle events like rotating the screen
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titlePlayFragment));
-
-        mapView.onResume();
         super.onResume();
+        mapView.onResume();
     }
 
 

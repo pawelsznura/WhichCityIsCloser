@@ -24,39 +24,18 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    public static HomeFragment newInstance(String param1, String param2) {
+
+    public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,19 +43,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         ((MainActivity) getActivity()).setAppBarTitle(getContext().getString(R.string.titleHomeFragment));
@@ -89,7 +61,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Button btnQuit = view.findViewById(R.id.btnquithome);
         btnQuit.setOnClickListener(this);
 
-
         return view;
     }
 
@@ -98,21 +69,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         // populate cities database
-
         CitiesDatabase citiesDatabase = CitiesDatabase.getDatabase(getContext());
         CitiesDAO citiesDAO = citiesDatabase.citiesDAO();
 
         Executor executor = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
         executor.execute(new Runnable() {
-
             @Override
             public void run() {
                 List<City> cachedCities = citiesDAO.getAllCities();
                 if (cachedCities.size() == 0) {
                     citiesDAO.insert(createListOfCities());
                 }
-
             }
         });
 
@@ -125,14 +92,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else if (v.getId() == R.id.btnquithome) {
             System.exit(0);
         }
-
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         // set title during the first startup and in case of lifecycle events like rotating the screen
         // based on
         // NOT_A_PROGRAMMER, 2015. Change ActionBar title using Fragments. [online]. Stack Overflow. Available from: https://stackoverflow.com/a/28453012/ [Accessed 21 October 2021].
@@ -140,7 +104,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public ArrayList<City> createListOfCities() {
-//        this function creates a small list of cities for easier testing
         ArrayList<City> arrayList = new ArrayList<>();
         arrayList.add(new City(45633, "Q84", "London", -0.1275, 51.507222222));
         arrayList.add(new City(144809, "Q2379199", "Edinburgh", -3.19333, 55.94973));
