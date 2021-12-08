@@ -3,6 +3,7 @@ package com.pawelsznuradev.whichcityiscloser;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.pawelsznuradev.whichcityiscloser.cityData.City;
 import com.pawelsznuradev.whichcityiscloser.highscore.Highscore;
 import com.pawelsznuradev.whichcityiscloser.highscore.HighscoreDao;
@@ -287,20 +289,30 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
 
+        LatLng positionCityQ = new LatLng(cityQ.getLatitude(), cityQ.getLongitude());
+        LatLng positionCityA1 = new LatLng(cityA1.getLatitude(), cityA1.getLongitude());
+        LatLng positionCityA2 = new LatLng(cityA2.getLatitude(), cityA2.getLongitude());
+
         googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(cityQ.getLatitude(), cityQ.getLongitude()))
+                .position(positionCityQ)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                 .title(cityQ.getName()));
 
         googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(cityA1.getLatitude(), cityA1.getLongitude()))
+                .position(positionCityA1)
                 .title(cityA1.getName()));
 
         googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(cityA2.getLatitude(), cityA2.getLongitude()))
+                .position(positionCityA2)
                 .title(cityA2.getName()));
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(cityQ.getLatitude(), cityQ.getLongitude())));
+        googleMap.addPolyline((new PolylineOptions()).add(positionCityA1, positionCityQ, positionCityA2)
+                .width(5)
+                .color(Color.BLACK)
+                .geodesic(true));
+
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positionCityQ, 3));
 
     }
 
