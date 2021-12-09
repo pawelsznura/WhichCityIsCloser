@@ -3,14 +3,19 @@ package com.pawelsznuradev.whichcityiscloser;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +53,9 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
     public static final String UNIT = "unit";
     public static final String USERNAME = "username";
 
+    private boolean locationPermissionGranted;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+
     private int distanceCityA1;
     private int distanceCityA2;
     private int selectedCity;
@@ -61,6 +69,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
     String units;
 
     MapView mapView;
+    GoogleMap map;
 
 
     public ResultFragment() {
@@ -265,32 +274,72 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
+        this.map = googleMap;
 
         LatLng positionCityQ = new LatLng(cityQ.getLatitude(), cityQ.getLongitude());
         LatLng positionCityA1 = new LatLng(cityA1.getLatitude(), cityA1.getLongitude());
         LatLng positionCityA2 = new LatLng(cityA2.getLatitude(), cityA2.getLongitude());
 
-        googleMap.addMarker(new MarkerOptions()
+        this.map.addMarker(new MarkerOptions()
                 .position(positionCityQ)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                 .title(cityQ.getName()));
 
-        googleMap.addMarker(new MarkerOptions()
+        map.addMarker(new MarkerOptions()
                 .position(positionCityA1)
                 .title(cityA1.getName()));
 
-        googleMap.addMarker(new MarkerOptions()
+        map.addMarker(new MarkerOptions()
                 .position(positionCityA2)
                 .title(cityA2.getName()));
 
-        googleMap.addPolyline((new PolylineOptions()).add(positionCityA1, positionCityQ, positionCityA2)
+        map.addPolyline((new PolylineOptions()).add(positionCityA1, positionCityQ, positionCityA2)
                 .width(5)
                 .color(Color.BLACK)
                 .geodesic(true));
 
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positionCityQ, 2));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(positionCityQ, 2));
 
+        // Prompt the user for permission.
+        getLocationPermission();
+
+        // Turn on the My Location layer and the related control on the map.
+        updateLocationUI();
+
+    }
+
+
+    private void getLocationPermission() {
+        /*
+         * Request location permission, so that we can get the location of the
+         * device. The result of the permission request is handled by a callback,
+         * onRequestPermissionsResult.
+         *  based on  https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial#java_1
+         */
+        if (ContextCompat.checkSelfPermission(getContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            locationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+    private void updateLocationUI() {
+        if (map == null) {
+            return;
+        }
+        try {
+            if (locationPermissionGranted) {
+                map.setMyLocationEnabled(true);
+                map.getUiSettings().setMyLocationButtonEnabled(true);
+            }
+        } catch (SecurityException e) {
+            Log.e("Exception: %s", e.getMessage());
+        }
     }
 
 
