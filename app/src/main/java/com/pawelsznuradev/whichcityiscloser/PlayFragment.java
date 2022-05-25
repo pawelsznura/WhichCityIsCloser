@@ -29,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
 import com.pawelsznuradev.whichcityiscloser.cityData.CitiesList;
 import com.pawelsznuradev.whichcityiscloser.cityData.City;
 import com.pawelsznuradev.whichcityiscloser.cityData.GeoDbApiService;
@@ -142,9 +143,20 @@ public class PlayFragment extends Fragment implements View.OnClickListener, OnMa
 
 
         // get data from API
-        GeoDbApiService apiService = new GeoDbApiService(getContext(), bundle, units);
-        apiService.getDistanceCities(cityQuestion.getId(), city1.getId(), "distanceCityA1");
-        apiService.getDistanceCities(cityQuestion.getId(), city2.getId(), "distanceCityA2");
+//        GeoDbApiService apiService = new GeoDbApiService(getContext(), bundle, units);
+//        apiService.getDistanceCities(cityQuestion.getId(), city1.getId(), "distanceCityA1");
+//        apiService.getDistanceCities(cityQuestion.getId(), city2.getId(), "distanceCityA2");
+
+        LatLng positionCityQ = new LatLng(cityQuestion.getLatitude(), cityQuestion.getLongitude());
+        LatLng positionCityA1 = new LatLng(city1.getLatitude(), city1.getLongitude());
+        LatLng positionCityA2 = new LatLng(city2.getLatitude(), city2.getLongitude());
+
+        int distance1 = (int) SphericalUtil.computeDistanceBetween(positionCityQ, positionCityA1) / 1000;
+        int distance2 = (int) SphericalUtil.computeDistanceBetween(positionCityQ, positionCityA2) / 1000;
+
+        bundle.putInt("distanceCityA1", distance1);
+        bundle.putInt("distanceCityA2", distance2);
+
 
         // putting local data into bundle
         bundle.putString("cityQname", cityQuestion.getName());
