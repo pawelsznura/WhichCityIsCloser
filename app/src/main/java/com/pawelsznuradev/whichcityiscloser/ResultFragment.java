@@ -192,6 +192,7 @@ public class ResultFragment extends Fragment implements View.OnClickListener, On
             } else if (selectedCity == 1) {
                 // user was wrong
                 cityQuestionTextView.setText(R.string.answerWrong);
+                saveHighscore();
             } else {
                 // selection error
                 cityQuestionTextView.setText(R.string.error);
