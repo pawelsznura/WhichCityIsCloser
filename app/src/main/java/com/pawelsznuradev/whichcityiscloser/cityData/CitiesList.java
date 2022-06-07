@@ -42,6 +42,7 @@ public interface CitiesList {
         arrayList.add(new City(148750, "Q2656", "Palermo", 13.361262, 38.115658));
         arrayList.add(new City(4935, "Q3130", "Sydney", 151.20732, -33.86785));
         arrayList.add(new City(30385, "Q10282", "Pamplona", -1.65, 42.816666666));
+
         return arrayList;
     }
 }
